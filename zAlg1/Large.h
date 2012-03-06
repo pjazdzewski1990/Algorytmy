@@ -642,51 +642,74 @@ class Large
 			}
 		}
 
+		/*
+			Algorytm mno¿enia "w s³upku",
+			algorytm nie uwzglêdnia znaku i 
+			zak³ada, ¿e oba systemy maj¹ t¹ sam¹ podstawê   
+		*/
+		Large ColumnMultplication(Large second){
+			Large res = Large(base);
+			//ka¿da cyfra z "second"
+			for(int i=second.lista.size()-1, potega=0; i>=0 ; i--, potega++){
+				//oblicz wynik cz¹stkowy
+				Large part = Large(*this);
+				part = part * second.lista[i];
+				//podnieœ do odpowiedniej potêgi
+				for(int j=0; j<potega; j++){
+					part = part * base;
+				}
+				//dodaj do ostatecznego wyniku
+				res = res.simpleAdd(part);
+			}
+			return res;
+		}
+
 		string toHex(){
 			stringstream ss;
-			//TODO: powinien automatycznie konwertowaæ na hexy
 			
 			if(isNegative()){
 				ss << '-';
 			}
 
+			Large l = Large(base);
+			//konwertuj na hex'y
 			if(base != 16){
-				return "ERROR";
+				l = Large::convert(*this, 16);
 			}else{
-				for(unsigned i=0; i<lista.size(); i++){
-					switch(lista[i]){
-					case 0:
-					case 1:
-					case 2:
-					case 3:
-					case 4:
-					case 5:
-					case 6:
-					case 7:
-					case 8:
-					case 9: 
-						ss << lista[i];
-						break;
-					case 10:
-						ss << 'a';
-						break;
-					case 11:
-						ss << 'b';
-						break;
-					case 12:
-						ss << 'c';
-						break;
-					case 13:
-						ss << 'd';
-						break;
-					case 14:
-						ss << 'e';
-						break;
-					case 15:
-						ss << 'f';
-						break;
-
-					}
+				l = *this;
+			}
+			for(unsigned i=0; i<l.lista.size(); i++){
+				switch(l.lista[i]){
+				case 0:
+				case 1:
+				case 2:
+				case 3:
+				case 4:
+				case 5:
+				case 6:
+				case 7:
+				case 8:
+				case 9: 
+					ss << l.lista[i];
+					break;
+				case 10:
+					ss << 'a';
+					break;
+				case 11:
+					ss << 'b';
+					break;
+				case 12:
+					ss << 'c';
+					break;
+				case 13:
+					ss << 'd';
+					break;
+				case 14:
+					ss << 'e';
+					break;
+				case 15:
+					ss << 'f';
+					break;
 				}
 			}
 			return ss.str();
