@@ -1,0 +1,2 @@
+all:
+	g++ zAlg1.cpp Large.cpp
