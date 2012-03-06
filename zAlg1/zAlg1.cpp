@@ -16,6 +16,7 @@
 #include <map>
 
 #include "Large.h"
+#include "Profiler.h"
 
 using namespace std;
 
@@ -24,7 +25,7 @@ int main(int argc, char* argv[])
 	//zak³adamy ¿e system docelowy jest pierwszym parametrem
 	long base =  atoi(argv[1]);
 
-	//system w ktoryum podawane bêd¹ liczby z wejœcia
+	//system w którym podawane bêd¹ liczby z wejœcia
 	long in_base = 16;
 	//cout << "Podaj baze systemu w ktorym bêdziesz podawa³: ";
 	//cin >> in_base;
@@ -85,7 +86,10 @@ int main(int argc, char* argv[])
 				cout << res.toHex() << endl;
 				break;
 			case '?':
-				cout << Large::comparisonToChar(l1,l2) << endl;;
+				cout << Large::comparisonToChar(l1,l2) << endl;
+				break;
+			case 'q':	//rundka profilera
+				Profiler("raport.txt").profile();
 				break;
 			default:
 				cout << "Nie poprawny operator" << endl;

@@ -1,5 +1,5 @@
-#ifndef _a_h_included_
-#define _a_h_included_
+#ifndef _LARGE_h_included_
+#define _LARGE_h_included_
 
 #include <iostream>
 #include <string>
@@ -11,6 +11,9 @@
 #include <math.h>
 
 using namespace std;
+
+extern long multiplication_count;
+extern long addition_count;
 
 class Large
 {
@@ -189,6 +192,7 @@ class Large
 		}
 
 	public:
+
 		Large(long _base): base(_base) {	
 			//uzupe³nij wartoœæ s³ownika, jeœli jest on pusty
 			if(dict.size() == 0){
@@ -215,6 +219,10 @@ class Large
 			i this jest wiêksze ni¿ second
 		*/
 		Large simpleSubtract(Large second){
+
+			//na potrzeby profilera
+			addition_count++;
+
 			Large res(base);
 			
 			long left;
@@ -287,7 +295,7 @@ class Large
 			return ss.str();
 		}
 
-		//zamien liczbê przkazan¹ jako obiekt string
+		//zamieñ liczbê przkazan¹ jako obiekt string
 		// i zapisan¹ w systemie o podstawie in_base (domyslnie 10)
 		static Large Set(string num, int base, int in_base = 10){
 			//TODO: in_base moze byæ wiêksza ni¿ docelowa - ERROR
@@ -367,6 +375,10 @@ class Large
 		}
 
 		Large operator*(int val){
+
+			//na potrzeby profilera
+			multiplication_count++;
+
 			Large res(base);
 
 			long carry = 0;
@@ -430,6 +442,10 @@ class Large
 		//na razie zak³adamy, ¿e maj¹ tak¹ sam¹ podstawê
 		//ignorujemy te¿ kwestie znaku
 		Large simpleAdd(Large val){
+
+			//na potrzeby profilera
+			addition_count++;
+
 			Large res(base);
 
 			long carry = 0;
@@ -781,4 +797,5 @@ class Large
 			return this->operate(second); 
 		}
 };
+
 #endif
