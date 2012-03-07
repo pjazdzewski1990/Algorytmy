@@ -1,2 +1,2 @@
 all:
-	g++ zAlg1.cpp Large.cpp Profiler.cpp
+	g++ -Wall -pedantic zAlg1.cpp Large.cpp Profiler.cpp

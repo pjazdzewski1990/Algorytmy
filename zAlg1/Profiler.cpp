@@ -8,8 +8,7 @@
 #include <fstream>
 using namespace std;
 
-Profiler::Profiler(string _report){
-	report = _report;
+Profiler::Profiler(){
 }
 
 void Profiler::profile(){
@@ -23,7 +22,7 @@ void Profiler::profile(){
 	long addClas;
 
 	ofstream myfile;
-	myfile.open (report);
+	myfile.open ("report.txt", ios_base::out | ios_base::in);
 
 	do{
 		cout << "Podaj 2 liczby odzielone spacja" << endl;

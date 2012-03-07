@@ -24,7 +24,7 @@ class Large
 		//lista przechowuj¹ca kolejne cyfry liczby 
 		// zapisanej w systemie o bazie base
 		// liczby "od lewej"(ma³e indeksy) maj¹ najwiêksz¹ potêgê
-		deque<long> lista;
+		vector<long> lista;
 
 		static int charToLong(char c){
 			return c-48;
@@ -61,8 +61,8 @@ class Large
 		//czy liczba jest ujemna 
 		bool negative;
 
-		deque<long> copyUpper(Large& large){
-			deque<long> ret;
+		vector<long> copyUpper(Large& large){
+			vector<long> ret;
 			
 			//uzupelnij liczbe large zerami od lewej
 			// a¿ d³ugoœæ liczby bêdzie poteg¹ 2 
@@ -75,8 +75,8 @@ class Large
 			return ret;
 		}
 
-		deque<long> copyLower(Large& large){
-			deque<long> ret;
+		vector<long> copyLower(Large& large){
+			vector<long> ret;
 			
 			//uzupelnij liczbe large zerami od lewej
 			// a¿ d³ugoœæ liczby bêdzie poteg¹ 2 
@@ -108,22 +108,27 @@ class Large
 		//TODO: chyba ju¿ nie potrzebne
 		void fillToPower(Large& large){
 			while(!isPowerOf2(large.lista.size()) ){
-				large.lista.push_front(0);
+				large.lista.insert(large.lista.begin(), 0);
+				//large.lista.push_front(0);
 			}
 		}
 
 		void fillWithZeros(Large& l1, Large& l2){
 			while(l1.lista.size() != l2.lista.size()){
 				if(l1.lista.size() < l2.lista.size()){
-					l1.lista.push_front(0);
+					l1.lista.insert(l1.lista.begin(), 0);
+					//l1.lista.push_front(0);
 				}else{
-					l2.lista.push_front(0);
+					l2.lista.insert(l2.lista.begin(), 0);
+					//l2.lista.push_front(0);
 				}
 			}
 
 			if(l1.lista.size() % 2 == 1){
-				l1.lista.push_front(0);
-				l2.lista.push_front(0);
+				l1.lista.insert(l1.lista.begin(), 0);
+				//l1.lista.push_front(0);
+				l2.lista.insert(l2.lista.begin(), 0);
+				//l2.lista.push_front(0);
 			}
 			return; 
 		}
@@ -201,7 +206,7 @@ class Large
 		}
 
 		//TODO: drugi argument jest bez sensu
-		Large(deque<long> numbers, long _base): base(_base) {	
+		Large(vector<long> numbers, long _base): base(_base) {	
 			//uzupe³nij wartoœæ s³ownika, jeœli jest on pusty
 			if(dict.size() == 0){
 				prepareDictVals();
@@ -266,7 +271,8 @@ class Large
 				}
 
 				//dorzuæ cyfrê do wyniku
-				res.lista.push_front(result);
+				res.lista.insert(res.lista.begin(), result);
+				//res.lista.push_front(result);
 				indexA--;
 				indexB--;
 				max--;
@@ -331,17 +337,24 @@ class Large
 
 		//zamieñ bazê podanej liczby "l" na "new_base"
 		static Large convert(Large l, long new_base){
+
+			//TODO: wykonaj sprawdzenie czy:
+			// this.base = new_base^x, wtedy ka¿d¹ pozycje w "this" zamianiamy na x cyfr w nowej liczbie
+			// jeœli this.base = new_base^-x, wtedy ka¿de x pozycji w "this" bêdzie 1 now¹ pozycja w wyniku 
+
 			Large result(new_base);
-			long power = 0;									//ile razy trzeba pomno¿yæ przez 10
+			long power = 0;									//ile razy trzeba pomno¿yæ przez baze
 			for(long i=l.lista.size()-1; i >= 0; i--){
 				long a = l.lista[i];						//wspó³czynnik na pozycji "i"
 				
 				Large partial(new_base);					//czêœciowy wynik
 				while(a >= new_base){
-					partial.lista.push_front(a%new_base);	//pocz¹tkowa wartoœæ
+					partial.lista.insert(partial.lista.begin(), a%new_base);//pocz¹tkowa wartoœæ
+					//partial.lista.push_front(a%new_base);	
 					a = a/new_base;
 				}
-				partial.lista.push_front(a);
+				partial.lista.insert(partial.lista.begin() ,a);
+				//partial.lista.push_front(a);
 
 				for(int j=0; j<power; j++){
 					partial = partial * l.base;				//zwiêksz ?-krotnie
@@ -355,7 +368,8 @@ class Large
 			//TODO:obejœciue
 			long test = result.lista[0];
 			if(test >= new_base){
-				result.lista.push_front(test/new_base);
+				result.lista.insert(result.lista.begin(), test/new_base);
+				//result.lista.push_front(test/new_base);
 				result.lista[1] = test%new_base;
 			}
 
@@ -386,18 +400,20 @@ class Large
 			for(int i = lista.size()-1; i>=0; i--){ 
 				sum = lista[i]*val;
 				sum += carry;
-				long c = carry;	//przechowaj wartoœæ przeniesienia
+				//long c = carry;	//przechowaj wartoœæ przeniesienia
 				carry = 0;		//nalicz nowe przeniesienie
 
 				//mieœci siê w przedziale
 				if(sum < base){
 					//ustaw i-t¹ cyfrê na sum 
-					res.lista.push_front(sum);
+					res.lista.insert(res.lista.begin(), sum);
+					//res.lista.push_front(sum);
 				}
 				//jest wiêksza ni¿ podstawa systemu
 				if(sum>=base){
 					//ustaw i-t¹ cyfrê na sum/base
-					res.lista.push_front(sum%base);
+					res.lista.insert(res.lista.begin(), sum%base);
+					//res.lista.push_front(sum%base);
 					carry = sum/base;
 				}
 				//dosz³o do przepe³nienia
@@ -408,7 +424,8 @@ class Large
 							//res.lista[i]++;
 							//zwiêksz o 1
 							if(res.lista.size() <= (unsigned)i){
-								res.lista.push_front(1);
+								res.lista.insert(res.lista.begin(), 1);
+								//res.lista.push_front(1);
 							}else{
 								res.lista[i]++;
 							}
@@ -419,7 +436,8 @@ class Large
 								//ustaw obecn¹ cyfrê na 0
 								//TODO: czy if ma sens? zbadaæ czy sam push wystarczy
 								if(res.lista.size() <=  (unsigned)i){
-									res.lista.push_front(0);
+									res.lista.insert(res.lista.begin(), 0);
+									//res.lista.push_front(0);
 								}else{
 									res.lista[i] = 0;
 								}
@@ -431,7 +449,8 @@ class Large
 
 			//jeœli mamy przeniesienie to dodaj
 			if(carry > 0){
-				res.lista.push_front(carry);
+				res.lista.insert(res.lista.begin(), carry);
+				//res.lista.push_front(carry);
 			}
 
 			res.setNegative(this->negative);
@@ -480,19 +499,21 @@ class Large
 
 				sum = left + right;	//dodaj wartoœci cz¹stkowe
 				sum += carry;
-				long c = carry;		//przechowaj wartoœæ przeniesienia
+				//long c = carry;		//przechowaj wartoœæ przeniesienia
 				carry = 0;			//nalicz nowe przeniesienie
 
 				//mieœci siê w przedziale
 				if(sum < base){
 					//w razie potrzeby rozszerz tablicê
 					//ustaw i-t¹ cyfrê na sum
-					res.lista.push_front(sum);
+					res.lista.insert(res.lista.begin(), sum);
+					//res.lista.push_front(sum);
 				}
 				//jest wiêksza ni¿ podstawa systemu
 				if(sum>=base){
 					//ustaw i-t¹ cyfrê na sum/base
-					res.lista.push_front(sum%base);
+					res.lista.insert(res.lista.begin(), sum%base);
+					//res.lista.push_front(sum%base);
 					carry = sum/base;
 				}
 
@@ -513,7 +534,8 @@ class Large
 
 			//jeœli mamy przeniesienie to dodaj
 			if(carry > 0){
-				res.lista.push_front(carry);
+				res.lista.insert(res.lista.begin(), carry);
+				//res.lista.push_front(carry);
 			}
 
 			res.setNegative(false);
@@ -595,7 +617,6 @@ class Large
 			if(lista.size()<=1 || second.lista.size()<=1){
 				//po prostu mno¿ymy 2 liczby
 				Large product = Large(base);
-				long val = 0;
 				if(lista.size() <= 1){
 					if(lista.size()==0){
 						return second;

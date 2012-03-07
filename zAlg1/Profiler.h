@@ -7,12 +7,10 @@ using namespace std;
 
 class Profiler {
 	public: 
-		Profiler(string _report);
+		Profiler();
 
 		void profile();
 	private:
-		//nazwa pliku do którego zapiszemy raport
-		string report;
 };
 
 #endif

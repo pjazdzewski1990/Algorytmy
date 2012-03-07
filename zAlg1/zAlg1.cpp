@@ -72,24 +72,24 @@ int main(int argc, char* argv[])
 		switch(command){
 			case '+':
 				res = l1 + l2;
-				res = Large::convert(res, 16);
+				//res = Large::convert(res, 16);
 				cout << res.toHex() << endl;
 				break;
 			case '-':
 				res = l1 - l2;
-				res = Large::convert(res, 16);
+				//res = Large::convert(res, 16);
 				cout << res.toHex() << endl;
 				break;
 			case '*':
 				res = l1 * l2;
-				res = Large::convert(res, 16);
+				//res = Large::convert(res, 16);
 				cout << res.toHex() << endl;
 				break;
 			case '?':
 				cout << Large::comparisonToChar(l1,l2) << endl;
 				break;
 			case 'q':	//rundka profilera
-				Profiler("raport.txt").profile();
+				Profiler().profile();
 				break;
 			default:
 				cout << "Nie poprawny operator" << endl;
