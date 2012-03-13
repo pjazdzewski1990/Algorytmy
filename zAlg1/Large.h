@@ -762,6 +762,11 @@ class Large
 			return '=';
 		}
 
+		Large divide(Large second, Large& rest);
+
+		void fix();
+
+		//OPERATORY
 		inline bool operator<(Large l) {
 			return (compare(l) == 1);
 		}
@@ -784,6 +789,7 @@ class Large
 
 		inline Large operator<<(long l){
 			Large res = Large(this->lista, base);
+			//res.setNegative(this->negative);
 			for(int i=0; i<l; i++){
 				res.lista.push_back(0);
 			}
