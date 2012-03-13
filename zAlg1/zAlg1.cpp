@@ -65,7 +65,7 @@ int main(int argc, char* argv[])
 	Large l2(base);
 	Large res(base);
 
-	while(true){
+	/*while(true){
 		cin>>liczba1>>command>>liczba2;
 		l1 = Large::Set(liczba1, base, in_base);
 		l2 = Large::Set(liczba2, base, in_base);
@@ -94,6 +94,15 @@ int main(int argc, char* argv[])
 			default:
 				cout << "Nie poprawny operator" << endl;
 		}
+	}*/
+
+	while(true){
+		cin>>liczba1>>liczba2;
+		l1 = Large::Set(liczba1, 10, in_base);
+		l2 = Large::Set(liczba2, 10, in_base);
+		Large rest = Large(base);
+		Large test = l1.divide(l2, rest);
+		cout << test.toString() << " reszta:"<<rest.toHex()<<endl;
 	}
 
 	return 0;

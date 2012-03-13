@@ -15,8 +15,6 @@ long addition_count;
 Large Large::divide(Large v, Large& rest){
 	Large u = Large(lista, base);
 	u.setNegative(false);
-	//na pocz¹tku ci¹gu cyfr chcemy mieæ 0
-	u.lista.insert(u.lista.begin(), 0);
 	
 	//przypadki bazowe
 	//przypadek u<v
@@ -61,7 +59,7 @@ Large Large::divide(Large v, Large& rest){
 			}
 		}
 
-		//TODO: kwestia znaków
+		//TODO: kwestia znaku
 		Large temp = v*_q;
 		//temp.setNegative(false);
 		//przesuñ kilka razy potem mozna ju¿ odejmowaæ
@@ -73,11 +71,13 @@ Large Large::divide(Large v, Large& rest){
 
 		if(u.isNegative()){
 			q.lista[q.lista.size()-1]--;
-			rest = u + v;
+			u = u + v;
 		}
 		i++;
 	}
 	rest = u;
+	rest.fix();
+	q.fix();
 	return q;
 }
 
@@ -100,11 +100,20 @@ void Large::fix(){
 
 	//B|
 	for(int i=0; i<lista.size();i++){
-		vector<long>::iterator it;
 		if(lista[i]==0){
-			it++;
+			lista.erase(lista.begin());
 		}else{
-			lista.erase(lista.begin(), it);
+			break;
 		}
 	}
+}
+
+inline Large Large::operator/(Large second){
+	Large res = this->divide(second, Large(base)); 
+	if(this->isNegative() != second.isNegative()){
+		res.setNegative(true);
+	}else{
+		res.setNegative(false);
+	}
+	return res;
 }

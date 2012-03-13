@@ -571,6 +571,8 @@ class Large
 		*/
 		int compareAbsolute(Large second){
 			//zacznij od porównania d³ugoœci
+			this->fix();
+			second.fix();
 			if(lista.size() != second.lista.size()){
 				if(lista.size() > second.lista.size()){
 					return -1;
@@ -823,6 +825,8 @@ class Large
 		inline Large operator+(Large second){
 			return this->operate(second); 
 		}
+
+		inline Large operator/(Large second);
 };
 
 #endif
