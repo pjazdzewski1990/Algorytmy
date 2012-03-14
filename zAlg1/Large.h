@@ -826,7 +826,16 @@ class Large
 			return this->operate(second); 
 		}
 
-		inline Large operator/(Large second);
+		inline Large operator/(Large second){
+			Large rest(base);
+			Large res = this->divide(second, rest); 
+			if(this->isNegative() != second.isNegative()){
+				res.setNegative(true);
+			}else{
+				res.setNegative(false);
+			}
+			return res;
+		}
 };
 
 #endif

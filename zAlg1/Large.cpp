@@ -99,21 +99,11 @@ void Large::fix(){
 	}
 
 	//B|
-	for(int i=0; i<lista.size();i++){
+	for(int i=0; i<(unsigned)lista.size();i++){
 		if(lista[i]==0){
 			lista.erase(lista.begin());
 		}else{
 			break;
 		}
 	}
-}
-
-inline Large Large::operator/(Large second){
-	Large res = this->divide(second, Large(base)); 
-	if(this->isNegative() != second.isNegative()){
-		res.setNegative(true);
-	}else{
-		res.setNegative(false);
-	}
-	return res;
 }

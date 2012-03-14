@@ -1,15 +1,17 @@
-﻿Build started 2012-03-13 19:50:54.
+﻿Build started 2012-03-14 08:41:14.
      1>Project "C:\Users\Patryk\Documents\Visual Studio 2010\Projects\zAlg1\zAlg1\zAlg1.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
-         Creating "Debug\zAlg1.unsuccessfulbuild" because "AlwaysCreate" was specified.
+         Touching "Debug\zAlg1.unsuccessfulbuild".
        ClCompile:
          All outputs are up-to-date.
          c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"Debug\zAlg1.pch" /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt Large.cpp Profiler.cpp zAlg1.cpp
          Large.cpp
      1>c:\users\patryk\documents\visual studio 2010\projects\zalg1\zalg1\large.cpp(102): warning C4018: '<' : signed/unsigned mismatch
          Generating Code...
-         Skipping... (no relevant changes detected)
+         Compiling...
          zAlg1.cpp
+         Generating Code...
+         Skipping... (no relevant changes detected)
          Profiler.cpp
        ManifestResourceCompile:
          All outputs are up-to-date.
@@ -32,4 +34,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:01.60
+Time Elapsed 00:00:02.24
