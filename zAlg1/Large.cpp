@@ -16,6 +16,19 @@ Large Large::divide(Large v, Large& rest){
 	Large u = Large(lista, base);
 	u.setNegative(false);
 	
+	//poprawka algorytmu
+	long d = base / (v.lista[0]+1);
+	u = u * d;
+	v = v * d;
+
+	long j = u.lista.size() - v.lista.size();
+	long i=0;
+
+	//dodaj zero na pocz¹tku u jeœli d=1
+	if(d==1){
+		u.lista.insert(u.lista.begin(), 0);
+	}
+
 	//przypadki bazowe
 	//przypadek u<v
 	if(u < v){
@@ -31,14 +44,25 @@ Large Large::divide(Large v, Large& rest){
 		}
 		return u.lista[0]/v.lista[0];
 	}
+	//równe liczby
+	if(u==v){
+		rest = Large(base);
+		Large res = Large(base);
+		res.setNegative(false);
+		res.lista.push_back(1);
+		return res;
+	}
 
 	//zgodnie z algorytmem z zajêæ
 	Large q(base);
 	q.setNegative(false);
 
-	unsigned long j = u.lista.size() - v.lista.size() -1;
-	unsigned long i=0;
 	while(j >= i){
+		//przerwij jeœli U jest ju¿ mniejsze od V
+		if(u.compareAbsolute(v) == 1){
+			break;
+		}
+
 		//TODO: zak³adamy, ¿e mo¿na wykonaæ "standardowe" dzielenie
 		long num =0;
 		if(u.lista.size()>i){
@@ -50,8 +74,8 @@ Large Large::divide(Large v, Large& rest){
 
 		long _q = num / v.lista[0];
 		long _r = num % v.lista[0];
-		
-		if(v.lista.size() > 1 && u.lista.size()>i+1 && _q*v.lista[1] > base*_r+u.lista[i+2]){
+
+		if(v.lista.size()>1 && u.lista.size()>i+2 && _q*v.lista[1] > base*_r+u.lista[i+2]){
 			_q--;
 			_r = _r + v.lista[0];
 			if(_q*u.lista[1] > base*_r+u.lista[i+1]){
@@ -62,8 +86,9 @@ Large Large::divide(Large v, Large& rest){
 		//TODO: kwestia znaku
 		Large temp = v*_q;
 		//temp.setNegative(false);
+		
 		//przesuñ kilka razy potem mozna ju¿ odejmowaæ
-		temp = temp<<(j-i);
+		temp = temp<<(j-i-1);
 		temp.setNegative(false);
 		u = u-temp;
 
@@ -99,9 +124,10 @@ void Large::fix(){
 	}
 
 	//B|
-	for(int i=0; i<(unsigned)lista.size();i++){
+	for(unsigned i=0; i<lista.size();i++){
 		if(lista[i]==0){
 			lista.erase(lista.begin());
+			i--;
 		}else{
 			break;
 		}

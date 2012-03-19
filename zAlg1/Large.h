@@ -21,10 +21,14 @@ class Large
 		//wewnêtrzna podstawa systemu
 		long base;
 
+		//czy liczba jest ujemna 
+		bool negative;
+
 		//lista przechowuj¹ca kolejne cyfry liczby 
 		// zapisanej w systemie o bazie base
 		// liczby "od lewej"(ma³e indeksy) maj¹ najwiêksz¹ potêgê
 		vector<long> lista;
+
 
 		static int charToLong(char c){
 			return c-48;
@@ -57,9 +61,6 @@ class Large
 				num++;
 			}
 		}
-
-		//czy liczba jest ujemna 
-		bool negative;
 
 		vector<long> copyUpper(Large& large){
 			vector<long> ret;
@@ -183,7 +184,7 @@ class Large
 					}
 				}else{//A jest dodatnie
 					if(second.isNegative()){//B jest ujemne
-						//7| 4 + (-10) = -(6-4)
+						//7| 4 + (-10) = -(10-4)
 						Large res = second.simpleSubtract(*this);
 						res.setNegative(true);
 						return res;
@@ -278,6 +279,7 @@ class Large
 				max--;
 			}
 
+			//res.fix();
 			res.setNegative(false);
 			return res;
 		}
@@ -303,7 +305,7 @@ class Large
 
 		//zamieñ liczbê przkazan¹ jako obiekt string
 		// i zapisan¹ w systemie o podstawie in_base (domyslnie 10)
-		static Large Set(string num, int base, int in_base = 10){
+		static Large Set(string num, int base, int in_base=10){
 			//TODO: in_base moze byæ wiêksza ni¿ docelowa - ERROR
 			Large result(base);
 			bool neg = false;
@@ -322,6 +324,7 @@ class Large
 				
 				Large partial(base);			//czêsciowy wynik
 				partial.lista.push_back(a);		//pocz¹tkowa wartoœæ
+				partial.setNegative(false);
 				for(int i=0; i<power; i++){
 					partial = partial * in_base;//zwiêksz in_base-krotnie
 				}
@@ -459,7 +462,7 @@ class Large
 		}
 
 		//na razie zak³adamy, ¿e maj¹ tak¹ sam¹ podstawê
-		//ignorujemy te¿ kwestie znaku
+		//i ¿e s¹ tegosamego znaku
 		Large simpleAdd(Large val){
 
 			//na potrzeby profilera
@@ -538,7 +541,8 @@ class Large
 				//res.lista.push_front(carry);
 			}
 
-			res.setNegative(false);
+			//res.fix();
+			res.setNegative(this->negative);
 			return res;
 		}
 
@@ -551,14 +555,23 @@ class Large
 		*/
 		int compare(Large second){
 			//obie liczby s¹ ró¿nego znaku
-			if(isNegative() != second.isNegative()){
-				if(isNegative()){
-					return -1;
-				}else{
+			Large l1 = Large(*this);
+			l1.fix();
+			Large l2 = Large(second);
+			l2.fix();
+
+			if(l1.isNegative() != l2.isNegative()){
+				if(l1.isNegative()){
 					return 1;
+				}else{
+					return -1;
 				}
 			}else{
-				return compareAbsolute(second);
+				int result = l1.compareAbsolute(l2);
+				if(l1.isNegative()){
+					result *=-1;
+				}
+				return result;
 			}
 		}
 
@@ -571,10 +584,12 @@ class Large
 		*/
 		int compareAbsolute(Large second){
 			//zacznij od porównania d³ugoœci
-			this->fix();
-			second.fix();
-			if(lista.size() != second.lista.size()){
-				if(lista.size() > second.lista.size()){
+			Large l1 = Large(*this);
+			Large l2 = Large(second);
+			l1.fix();
+			l2.fix();
+			if(l1.lista.size() != l2.lista.size()){
+				if(l1.lista.size() > l2.lista.size()){
 					return -1;
 				}else{
 					return 1;
@@ -582,15 +597,15 @@ class Large
 			}else{
 				//przechodzimy po kolei i porównujemy elementy
 				int i = 0;
-				int size = lista.size();
+				int size = l1.lista.size();
 				//dopóki mamy jeszcze nie sprawdzone pozycje
 				while(i < size){
 					//ten obiekt jest wiêkszy na pozycji i
-					if(lista[i] > second.lista[i]){
+					if(l1.lista[i] > l2.lista[i]){
 						return -1;
 					} 
 					//obiekt second jest wiêkszy na pozycji i
-					if(lista[i] < second.lista[i]){
+					if(l1.lista[i] < l2.lista[i]){
 						return 1;
 					} 
 
@@ -778,7 +793,7 @@ class Large
 		}
 
 		inline bool operator>(Large l) {
-			return (compare(l) == -1);
+			return compare(l) == -1;
 		}
 
 		inline bool operator>=(Large l) {
@@ -789,9 +804,13 @@ class Large
 			return compare(l) == 0;
 		}
 
+		inline bool operator!=(Large l) {
+			return compare(l) != 0;
+		}
+
 		inline Large operator<<(long l){
 			Large res = Large(this->lista, base);
-			//res.setNegative(this->negative);
+			//przesuñ w lewo
 			for(int i=0; i<l; i++){
 				res.lista.push_back(0);
 			}
