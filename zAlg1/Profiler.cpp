@@ -17,9 +17,11 @@ void Profiler::profile(){
 
 	long multiKara;
 	long multiClas;
+	long multiDiv;
 
 	long addKara;
 	long addClas;
+	long addDiv;
 
 	ofstream myfile;
 	myfile.open ("report.txt", ios_base::out | ios_base::in);
@@ -43,11 +45,20 @@ void Profiler::profile(){
 		multiClas = multiplication_count;
 		addClas = addition_count;
 
+		//testuj klasyczny algorytm
+		multiplication_count = addition_count = 0;
+		result = l1/l2;
+		multiDiv = multiplication_count;
+		addDiv = addition_count;
+
 		//zapisz dane z obecnego obrotu
-		myfile << l1_str << " * " << l2_str<<endl;
+		myfile << l1_str << " i " << l2_str << endl;
 		myfile << "Karatsuba	*" << multiKara << "	+" << addKara ;
 		myfile << "\n";
-		myfile << "Classic		*" << multiClas << "	+" << addClas;
+		myfile << "Multi		*" << multiClas << "	+" << addClas;
+		myfile << "\n";
+		myfile << "Div			*" << multiDiv << "		+" << addDiv;
+		myfile << "\n";
 		myfile.flush();
 	}while(true);
 

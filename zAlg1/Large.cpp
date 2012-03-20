@@ -65,17 +65,17 @@ Large Large::divide(Large v, Large& rest){
 
 		//TODO: zak³adamy, ¿e mo¿na wykonaæ "standardowe" dzielenie
 		long num =0;
-		if(u.lista.size()>i){
+		if(u.lista.size()>(unsigned)i){
 			num = u.lista[i]*base;
 		}
-		if(u.lista.size()>i+1){
+		if(u.lista.size()>(unsigned)i+1){
 			num += u.lista[i+1];
 		}
 
 		long _q = num / v.lista[0];
 		long _r = num % v.lista[0];
 
-		if(v.lista.size()>1 && u.lista.size()>i+2 && _q*v.lista[1] > base*_r+u.lista[i+2]){
+		if(v.lista.size()>1 && u.lista.size()>(unsigned)i+2 && _q*v.lista[1] > base*_r+u.lista[i+2]){
 			_q--;
 			_r = _r + v.lista[0];
 			if(_q*u.lista[1] > base*_r+u.lista[i+1]){
