@@ -164,6 +164,38 @@ void Tester::test_divide(){
 	if (left != right){
 		cout << "Test_Div5: " << test1.toString() << " " << test2.toString() << endl;
 	}
+	//test6
+	test1 = Large::Set("04343", base, in_base);
+	test2 = Large::Set("-012", base, in_base);
+	left = test1/test2;
+	right = Large::Set("-3bc", base, in_base);
+	if (left != right){
+		cout << "Test_Div6: " << test1.toString() << " " << test2.toString() << endl;
+	}
+	//test7
+	test1 = Large::Set("61000", base, in_base);
+	test2 = Large::Set("1000", base, in_base);
+	left = test1/test2;
+	right = Large::Set("61", base, in_base);
+	if (left != right){
+		cout << "Test_Div7: " << test1.toString() << " " << test2.toString() << endl;
+	}
+	//test8
+	test1 = Large::Set("abcd", base, in_base);
+	test2 = Large::Set("ab", base, in_base);
+	left = test1/test2;
+	right = Large::Set("101", base, in_base);
+	if (left != right){
+		cout << "Test_Div7: " << test1.toString() << " " << test2.toString() << endl;
+	}
+	//test9
+	test1 = Large::Set("12341", base, in_base);
+	test2 = Large::Set("1", base, in_base);
+	left = test1/test2;
+	right = Large::Set("12341", base, in_base);
+	if (left != right){
+		cout << "Test_Div9: " << test1.toString() << " " << test2.toString() << endl;
+	}
 }
 
 //czy pierwszy element jest mniejszy od drugiego

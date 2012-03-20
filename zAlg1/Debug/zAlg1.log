@@ -1,4 +1,4 @@
-﻿Build started 2012-03-19 23:02:37.
+﻿Build started 2012-03-20 14:28:33.
      1>Project "C:\Users\Patryk\Documents\Visual Studio 2010\Projects\zAlg1\zAlg1\zAlg1.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
          Creating "Debug\zAlg1.unsuccessfulbuild" because "AlwaysCreate" was specified.
@@ -28,4 +28,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:01.26
+Time Elapsed 00:00:01.22
