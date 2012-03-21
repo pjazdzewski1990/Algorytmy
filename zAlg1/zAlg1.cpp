@@ -66,7 +66,7 @@ int main(int argc, char* argv[])
 	Large l2(base);
 	Large res(base);
 
-	while(true){
+	/*while(true){
 		cin>>liczba1>>command>>liczba2;
 		l1 = Large::Set(liczba1, base, in_base);
 		l2 = Large::Set(liczba2, base, in_base);
@@ -100,10 +100,10 @@ int main(int argc, char* argv[])
 			default:
 				cout << "Nie poprawny operator" << endl;
 		}
-	}
+	}*/
 
-	//Tester t = Tester();
-	//t.run();
+	Tester t = Tester();
+	t.run();
 
 	cin >>command;
 	return 0;

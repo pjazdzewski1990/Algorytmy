@@ -369,12 +369,13 @@ class Large
 			}
 
 			//TODO:obejœciue
-			long test = result.lista[0];
+			/*long test = result.lista[0];
 			if(test >= new_base){
 				result.lista.insert(result.lista.begin(), test/new_base);
 				//result.lista.push_front(test/new_base);
 				result.lista[1] = test%new_base;
-			}
+			}*/
+			result.fix();
 
 			result.setNegative(l.isNegative());
 			return result;
@@ -782,6 +783,10 @@ class Large
 		Large divide(Large second, Large& rest);
 
 		void fix();
+
+		void removeZero();
+
+		void checkBase();
 
 		//OPERATORY
 		inline bool operator<(Large l) {

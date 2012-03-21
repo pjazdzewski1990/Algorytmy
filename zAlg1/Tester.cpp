@@ -7,14 +7,73 @@
 //uruchamiaj wszystkie testy po kolei
 void Tester::run(){
 	cout<< "Test-start" <<endl;
-	test_divide();
+
+	test_hex();
+	/*test_divide();
 	test_multpily();
 	test_bigger();
 	test_smaller();
 	test_add();
-	test_substract();
+	test_substract();*/
 
 	cout<< "Test-koniec" <<endl;
+}
+//testuj dodawanie a+b
+void Tester::test_hex(){
+	//test1
+	Large test1 = Large::Set("aaa123", base, in_base);
+	if (test1.toHex().compare("aaa123")!=0){
+		cout << "Test_Hex1: " << test1.toString() << " " << test1.toHex() << endl;
+	}
+	//test2
+	test1 = Large::Set("123dd123", base, in_base);
+	if (test1.toHex().compare("123dd123")!=0){
+		cout << "Test_Hex2: " << test1.toString() << " " << test1.toHex() << endl;
+	}
+	//test3
+	test1 = Large::Set("eeeeee", base, in_base);
+	if (test1.toHex().compare("eeeeee")!=0){
+		cout << "Test_Hex3: " << test1.toString() << " " << test1.toHex() << endl;
+	}
+	//test4
+	test1 = Large::Set("321123", base, in_base);
+	if (test1.toHex().compare("321123")!=0){
+		cout << "Test_Hex3: " << test1.toString() << " " << test1.toHex() << endl;
+	}
+	//test5
+	test1 = Large::Set("123456123", base, in_base);
+	if (test1.toHex().compare("123456123")!=0){
+		cout << "Test_Hex4: " << test1.toString() << " " << test1.toHex() << endl;
+	}
+	//test6
+	test1 = Large::Set("0555", base, in_base);
+	if (test1.toHex().compare("555")!=0){
+		cout << "Test_Hex5: " << test1.toString() << " " << test1.toHex() << endl;
+	}
+	//test7
+	test1 = Large::Set("-321123", base, in_base);
+	if (test1.toHex().compare("-321123")!=0){
+		cout << "Test_Hex6: " << test1.toString() << " " << test1.toHex() << endl;
+	}
+	//test8
+	test1 = Large::Set("-123456123", base, in_base);
+	if (test1.toHex().compare("-123456123")!=0){
+		cout << "Test_Hex7: " << test1.toString() << " " << test1.toHex() << endl;
+	}
+	//test9
+	test1 = Large::Set("-0555", base, in_base);
+	if (test1.toHex().compare("-555")!=0){
+		cout << "Test_Hex8: " << test1.toString() << " " << test1.toHex() << endl;
+	}
+	//test10
+	test1 = Large::Set("-abcdefa", base, in_base);
+	if (test1.toHex().compare("-abcdefa")!=0){
+		cout << "Test_Hex9: " << test1.toString() << " " << test1.toHex() << endl;
+	}
+	test1 = Large::Set("00000000003", base, in_base);
+	if (test1.toHex().compare("3")!=0){
+		cout << "Test_Hex10: " << test1.toString() << " " << test1.toHex() << endl;
+	}
 }
 
 //testuj dodawanie a+b
@@ -48,6 +107,12 @@ void Tester::test_add(){
 	test2 = Large::Set("300", base, in_base);
 	if ((test1+test2) != Large::Set("-100", base, in_base)){
 		cout << "Test_Add5: " << test1.toString() << " " << test2.toString() << endl;
+	}
+	//test6
+	test1 = Large::Set("4000", base, in_base);
+	test2 = Large::Set("3000", base, in_base);
+	if ((test1+test2) != Large::Set("28672", base, in_base)){
+		cout << "Test_Add6: " << test1.toString() << " " << test2.toString() << endl;
 	}
 }
 	
@@ -83,6 +148,12 @@ void Tester::test_substract(){
 	if ((test1-test2) != Large::Set("101", base, in_base)){
 		cout << "Test_Sub5: " << test1.toString() << " " << test2.toString() << endl;
 	}
+	//test6
+	test1 = Large::Set("4500", base, in_base);
+	test2 = Large::Set("1200", base, in_base);
+	if ((test1-test2) != Large::Set("13056", base, in_base)){
+		cout << "Test_Sub6: " << test1.toString() << " " << test2.toString() << endl;
+	}
 }
 	
 //test a*b
@@ -111,11 +182,17 @@ void Tester::test_multpily(){
 	if ((test1*test2) != Large::Set("38e83", base, in_base)){
 		cout << "Test_Mul4: " << test1.toString() << " " << test2.toString() << endl;
 	}
-	//test4
+	//test5
 	test1 = Large::Set("2222", base, in_base);
 	test2 = Large::Set("555", base, in_base);
 	if ((test1*test2) != Large::Set("b5ff4a", base, in_base)){
-		cout << "Test_Mul4: " << test1.toString() << " " << test2.toString() << endl;
+		cout << "Test_Mul5: " << test1.toString() << " " << test2.toString() << endl;
+	}
+	//test6
+	test1 = Large::Set("-135", base, in_base);
+	test2 = Large::Set("531", base, in_base);
+	if ((test1*test2) != Large::Set("-64425", base, in_base)){
+		cout << "Test_Mul6: " << test1.toString() << " " << test2.toString() << endl;
 	}
 }
 
@@ -195,6 +272,14 @@ void Tester::test_divide(){
 	right = Large::Set("12341", base, in_base);
 	if (left != right){
 		cout << "Test_Div9: " << test1.toString() << " " << test2.toString() << endl;
+	}
+	//test10
+	test1 = Large::Set("123412", base, in_base);
+	test2 = Large::Set("22", base, in_base);
+	left = test1/test2;
+	right = Large::Set("89f", base, in_base);
+	if (left != right){
+		cout << "Test_Div10: " << test1.toString() << " " << test2.toString() << endl;
 	}
 }
 

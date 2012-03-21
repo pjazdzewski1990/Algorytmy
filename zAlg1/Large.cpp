@@ -106,24 +106,18 @@ Large Large::divide(Large v, Large& rest){
 	return q;
 }
 
-//popraw liczbe:
+//popraw liczbê:
 // A|zmniejsz liczby w komórkach by pasowa³y do bazy
 // B|obetnij 0 na pocz¹tku
 void Large::fix(){
 	//A|
-	long carry =0;
-	for(int i=lista.size()-1; i>=0; i--){
-		lista[i]+=carry;
-		if(lista[i]>=base){
-			carry = lista[i] / base;
-			lista[i] = lista[i] % base;
-		}
-	}
-	if(carry!=0){
-		lista.insert(lista.begin(), carry);
-	}
+	removeZero();
 
 	//B|
+	checkBase();
+}
+
+void Large::removeZero(){
 	for(unsigned i=0; i<lista.size();i++){
 		if(lista[i]==0){
 			lista.erase(lista.begin());
@@ -131,5 +125,20 @@ void Large::fix(){
 		}else{
 			break;
 		}
+	}
+}
+
+void Large::checkBase(){
+	long carry = 0;
+	for(int i=lista.size()-1; i>=0; i--){
+		lista[i]+=carry;
+		if(lista[i]>=base){
+			carry = lista[i] / base;
+			lista[i] = lista[i] % base;
+		}
+	}
+	while(carry!=0){
+		lista.insert(lista.begin(), carry%base);
+		carry = carry/base;
 	}
 }
