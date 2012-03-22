@@ -100,7 +100,7 @@ int main(int argc, char* argv[])
 			default:
 				cout << "Nie poprawny operator" << endl;
 		}
-	}*/
+	//}*/
 
 	Tester t = Tester();
 	t.run();

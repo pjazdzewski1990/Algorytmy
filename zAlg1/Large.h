@@ -198,6 +198,10 @@ class Large
 		}
 
 	public:
+		//defaultowy konstruktor na potrzeby LargeRational
+		Large(){
+			Large(16);
+		}
 
 		Large(long _base): base(_base) {	
 			//uzupe³nij wartoœæ s³ownika, jeœli jest on pusty
@@ -787,6 +791,8 @@ class Large
 		void removeZero();
 
 		void checkBase();
+
+		long getBase();
 
 		//OPERATORY
 		inline bool operator<(Large l) {

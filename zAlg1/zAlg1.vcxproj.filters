@@ -17,6 +17,9 @@
   <ItemGroup>
     <None Include="ReadMe.txt" />
     <None Include="makefile.txt" />
+    <None Include="LargeRational.cpp">
+      <Filter>Source Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -32,6 +35,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Tester.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LargeRational.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

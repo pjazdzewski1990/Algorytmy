@@ -9,12 +9,12 @@ void Tester::run(){
 	cout<< "Test-start" <<endl;
 
 	test_hex();
-	/*test_divide();
+	test_divide();
 	test_multpily();
 	test_bigger();
 	test_smaller();
 	test_add();
-	test_substract();*/
+	test_substract();
 
 	cout<< "Test-koniec" <<endl;
 }
@@ -111,8 +111,14 @@ void Tester::test_add(){
 	//test6
 	test1 = Large::Set("4000", base, in_base);
 	test2 = Large::Set("3000", base, in_base);
-	if ((test1+test2) != Large::Set("28672", base, in_base)){
+	if ((test1+test2) != Large::Set("7000", base, in_base)){
 		cout << "Test_Add6: " << test1.toString() << " " << test2.toString() << endl;
+	}
+	//test7
+	test1 = Large::Set("abcd", base, in_base);
+	test2 = Large::Set("dcba", base, in_base);
+	if ((test1+test2) != Large::Set("18887", base, in_base)){
+		cout << "Test_Add7: " << test1.toString() << " " << test2.toString() << endl;
 	}
 }
 	
@@ -151,8 +157,14 @@ void Tester::test_substract(){
 	//test6
 	test1 = Large::Set("4500", base, in_base);
 	test2 = Large::Set("1200", base, in_base);
-	if ((test1-test2) != Large::Set("13056", base, in_base)){
+	if ((test1-test2) != Large::Set("3300", base, in_base)){
 		cout << "Test_Sub6: " << test1.toString() << " " << test2.toString() << endl;
+	}
+	//test7
+	test1 = Large::Set("aa00", base, in_base);
+	test2 = Large::Set("aabc", base, in_base);
+	if ((test1-test2) != Large::Set("-bc", base, in_base)){
+		cout << "Test_Sub7: " << test1.toString() << " " << test2.toString() << endl;
 	}
 }
 	
@@ -277,9 +289,17 @@ void Tester::test_divide(){
 	test1 = Large::Set("123412", base, in_base);
 	test2 = Large::Set("22", base, in_base);
 	left = test1/test2;
-	right = Large::Set("89f", base, in_base);
+	right = Large::Set("890f", base, in_base);
 	if (left != right){
 		cout << "Test_Div10: " << test1.toString() << " " << test2.toString() << endl;
+	}
+	//test11
+	test1 = Large::Set("aaeebb", base, in_base);
+	test2 = Large::Set("22", base, in_base);
+	left = test1/test2;
+	right = Large::Set("50705", base, in_base);
+	if (left != right){
+		cout << "Test_Div11: " << test1.toString() << " " << test2.toString() << endl;
 	}
 }
 

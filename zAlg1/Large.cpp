@@ -142,3 +142,7 @@ void Large::checkBase(){
 		carry = carry/base;
 	}
 }
+
+long Large::getBase(){
+	return base;
+}
