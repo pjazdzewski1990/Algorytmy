@@ -16,8 +16,11 @@
 #include <map>
 
 #include "Large.h"
+#include "LargeRational.h"
+
 #include "Profiler.h"
 #include "Tester.h"
+#include "TesterRational.h"
 
 using namespace std;
 
@@ -102,6 +105,8 @@ int main(int argc, char* argv[])
 		}
 	//}*/
 
+	TesterRational tt = TesterRational();
+	tt.run();
 	Tester t = Tester();
 	t.run();
 

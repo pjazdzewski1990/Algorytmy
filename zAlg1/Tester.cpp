@@ -1,6 +1,7 @@
 #include "stdafx.h"
 
 #include "Tester.h"
+#include "LargeRational.h"
 #include <string>
 #include <iostream>
 
@@ -18,6 +19,7 @@ void Tester::run(){
 
 	cout<< "Test-koniec" <<endl;
 }
+
 //testuj dodawanie a+b
 void Tester::test_hex(){
 	//test1
@@ -206,11 +208,16 @@ void Tester::test_multpily(){
 	if ((test1*test2) != Large::Set("-64425", base, in_base)){
 		cout << "Test_Mul6: " << test1.toString() << " " << test2.toString() << endl;
 	}
+	//test7
+	test1 = Large::Set("-000a000", base, in_base);
+	test2 = Large::Set("-000a000", base, in_base);
+	if ((test1*test2) != Large::Set("64000000", base, in_base)){
+		cout << "Test_Mul7: " << test1.toString() << " " << test2.toString() << endl;
+	}
 }
 
 //testujemy dzielenie a/b - wartoœæ calkowita (nie reszta)
 void Tester::test_divide(){
-	
 	//test0
 	Large test1 = Large::Set("1004", 10, in_base);
 	Large test2 = Large::Set("24c", 10, in_base);
@@ -300,6 +307,14 @@ void Tester::test_divide(){
 	right = Large::Set("50705", base, in_base);
 	if (left != right){
 		cout << "Test_Div11: " << test1.toString() << " " << test2.toString() << endl;
+	}
+	//test12
+	test1 = Large::Set("000bb000", base, in_base);
+	test2 = Large::Set("-22", base, in_base);
+	left = test1/test2;
+	right = Large::Set("-5800", base, in_base);
+	if (left != right){
+		cout << "Test_Div12: " << test1.toString() << " " << test2.toString() << endl;
 	}
 }
 

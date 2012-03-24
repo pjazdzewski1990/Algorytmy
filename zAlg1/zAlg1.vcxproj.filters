@@ -40,6 +40,9 @@
     <ClInclude Include="LargeRational.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="TesterRational.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -55,6 +58,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Tester.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TesterRational.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
