@@ -40,8 +40,7 @@ class LargeRational {
 			ss << "(";
 			ss <<  licznik.getBase();
 			ss <<  ")";
-			//TODO
-			string test = ss.str();
+
 			return ss.str();
 		}
 		string toHex();
@@ -68,7 +67,47 @@ class LargeRational {
 
 		LargeRational add(LargeRational second);
 		LargeRational mul(LargeRational second);
-		static long GCD(LargeRational first, LargeRational second);
+		static LargeRational GCD(LargeRational first, LargeRational second){
+			Large s = Large::Set("1", first.licznik.getBase(), 10); 
+			Large t = Large::Set("0", first.licznik.getBase(), 10); 
+			LargeRational d = LargeRational(first);
+
+			Large v1 = Large::Set("0", first.licznik.getBase(), 10); 
+			Large v2 = Large::Set("1", first.licznik.getBase(), 10); 
+			LargeRational v3 = LargeRational(second);
+
+			while(!(v3==Large::Set("0", first.licznik.getBase(), 10))){
+				//zmienna pomocnicza
+				LargeRational temp = d.divide(v3);
+				Large helper = temp.licznik/temp.mianownik;
+
+				//krok 1
+				Large t1 = s - (helper * v1);
+				Large t2 = t - (helper * v2);
+				LargeRational t3 = d.substract(v3 * helper);
+
+				//krok2
+				s = v1;
+				t = v2;
+				d = v3;
+
+				//krok3
+				v1 = t1;
+				v2 = t2;
+				v3 = t3;
+			}
+			return d;
+		}
+
+		/**
+			Dzielenie dwóch ulamków na zasadzie mno¿enia z liczb¹ odwrotn¹ 
+		*/
+		LargeRational divide(LargeRational arg2);
+
+		/*
+			Typowe (szkolne) odejmowanie u³amków
+		*/
+		LargeRational substract(LargeRational arg);
 
 		//OPERATORY
 		bool operator==(long val){
@@ -79,6 +118,12 @@ class LargeRational {
 			//obie liczby musz¹ byæ znormalizowane
 			return (licznik==second.licznik) && (mianownik==second.mianownik);
 		}
+		LargeRational operator*(Large l){
+			LargeRational lr(*this);
+			lr.licznik = lr.licznik * l;
+			return lr;
+		}
+
 };
 
 #endif

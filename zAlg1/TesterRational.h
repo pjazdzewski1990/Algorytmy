@@ -27,4 +27,6 @@ class TesterRational{
 		void test_bigger();
 		void test_hex();*/
 		void test_set();
+		void test_divide();
+		void test_substract();
 };

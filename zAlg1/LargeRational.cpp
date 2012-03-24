@@ -3,23 +3,6 @@
 #include "Large.h"
 #include "LargeRational.h"
 
-/*string LargeRational::toString(){
-	stringstream ss;
-
-	if(licznik.isNegative()){
-		ss << '-';
-	}
-
-	ss << licznik.toString();
-	ss << "-";
-	ss << mianownik.toString();
-
-	ss << "(";
-	ss <<  licznik.getBase();
-	ss <<  ")";
-
-	return ss.str();
-}*/
 
 string LargeRational::toHex(){
 	stringstream ss;
@@ -50,7 +33,8 @@ LargeRational LargeRational::add(LargeRational second){
 	if(second == 0){
 		return LargeRational(*this);
 	}
-	long d = GCD(*this, second);
+	//TODO
+	long d = 1;//GCD(*this, second);
 	if(d == 1){
 		LargeRational res = LargeRational(licznik*second.mianownik + mianownik*second.licznik, mianownik*second.mianownik);
 	}else{
@@ -61,9 +45,30 @@ LargeRational LargeRational::add(LargeRational second){
 		if(t1==0){
 			return LargeRational(Large::Set("0",licznik.getBase(), 10));
 		}else{
-			long e = GCD(t1, t1); //powinno byæ d
+			//TODO:
+			long e = 1; //GCD(t1, t1); //powinno byæ d
 			LargeRational res = LargeRational(t1/e, t2/e);
 			return res;
 		}
 	}
+}
+
+/**
+	Dzielenie dwóch ulamków na zasadzie mno¿enia z liczb¹ odwrotn¹ 
+*/
+LargeRational LargeRational::divide(LargeRational arg2){
+	LargeRational lr = LargeRational(licznik*arg2.mianownik, mianownik*arg2.licznik);
+	//TODO: powinno byæ jeszcze poprawione korzystaj¹c z GCD
+	return lr;
+}		
+
+/*
+	Typowe (szkolne) odejmowanie u³amków
+	Nie interesuje nas kwestia znaku.
+	Zak³adamy, ¿e liczby s¹ tej samej podstawy.
+	This jest wiêksze ni¿ arg.
+*/
+LargeRational LargeRational::substract(LargeRational arg){
+	LargeRational res = LargeRational(licznik*arg.mianownik - arg.licznik*mianownik, mianownik*arg.mianownik); 
+	return res;
 }
