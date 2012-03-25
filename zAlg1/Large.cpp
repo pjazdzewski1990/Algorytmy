@@ -15,7 +15,37 @@ long addition_count;
 Large Large::divide(Large v, Large& rest){
 	Large u = Large(lista, base);
 	u.setNegative(false);
+
+	//przypadki bazowe
+	//przypadek u<v
+	if(this->compareAbsolute(v) == 1){
+		rest = Large(u);
+		return Large::Set("0", base);
+	}
+	//pojedyncze liczby
+	if(u.lista.size() == 1 && v.lista.size() == 1){
+		if(rest.lista.size() == 1){
+			rest.lista[0] = u.lista[0]%v.lista[0];
+		}else{
+			rest.lista.push_back(u.lista[0]%v.lista[0]);
+		}
+		Large l(base);
+		l.lista.push_back(u.lista[0]/v.lista[0]);
+		return l;
+	}
+	//równe liczby
+	if(u==v){
+		rest = Large(base);
+		Large res = Large(base);
+		res.setNegative(false);
+		res.lista.push_back(1);
+		return res;
+	}
 	
+	//Algorytm z zajêæ
+	//nie chcemy dzieliæ przez zero
+	v.fix();
+
 	//poprawka algorytmu
 	long d = base / (v.lista[0]+1);
 	u = u * d;
@@ -27,30 +57,6 @@ Large Large::divide(Large v, Large& rest){
 	//dodaj zero na pocz¹tku u jeœli d=1
 	if(d==1){
 		u.lista.insert(u.lista.begin(), 0);
-	}
-
-	//przypadki bazowe
-	//przypadek u<v
-	if(u < v){
-		rest = Large(u);
-		return 0;
-	}
-	//pojedyncze liczby
-	if(u.lista.size() == 1 && v.lista.size() == 1){
-		if(rest.lista.size() == 1){
-			rest.lista[0] = u.lista[0]%v.lista[0];
-		}else{
-			rest.lista.push_back(u.lista[0]%v.lista[0]);
-		}
-		return u.lista[0]/v.lista[0];
-	}
-	//równe liczby
-	if(u==v){
-		rest = Large(base);
-		Large res = Large(base);
-		res.setNegative(false);
-		res.lista.push_back(1);
-		return res;
 	}
 
 	//zgodnie z algorytmem z zajêæ
@@ -73,6 +79,10 @@ Large Large::divide(Large v, Large& rest){
 		}
 
 		long _q = num / v.lista[0];
+		//bo na raz mo¿emy wstawiæ tylko jedn¹ cyfrê
+		if(_q > base){
+			_q = _q/base;
+		}
 		long _r = num % v.lista[0];
 
 		if(v.lista.size()>1 && u.lista.size()>(unsigned)i+2 && _q*v.lista[1] > base*_r+u.lista[i+2]){
@@ -92,6 +102,7 @@ Large Large::divide(Large v, Large& rest){
 		temp.setNegative(false);
 		u = u-temp;
 
+		//dzielimy przez bazê
 		q.lista.push_back(_q);
 
 		if(u.isNegative()){
@@ -117,9 +128,12 @@ void Large::fix(){
 	checkBase();
 }
 
+/*
+	Usuwa z liczby zera znajduj¹ce siê na pocz¹tkowych pozycjach
+*/
 void Large::removeZero(){
 	for(unsigned i=0; i<lista.size();i++){
-		if(lista[i]==0){
+		if(lista[i]==0 && lista.size()>1){
 			lista.erase(lista.begin());
 			i--;
 		}else{

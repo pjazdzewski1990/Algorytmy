@@ -58,7 +58,7 @@ class LargeRational {
 				licznik = num.substr(0, pos);
 			}
 			string mianownik = "1";
-			if(pos != -1){
+			if(pos != -1 && pos != num.length()-1){
 				mianownik = num.substr(pos+1);
 			}
 			LargeRational res(Large::Set(licznik, base, in_base), Large::Set(mianownik, base, in_base));
@@ -67,24 +67,34 @@ class LargeRational {
 
 		LargeRational add(LargeRational second);
 		LargeRational mul(LargeRational second);
-		static LargeRational GCD(LargeRational first, LargeRational second){
-			Large s = Large::Set("1", first.licznik.getBase(), 10); 
-			Large t = Large::Set("0", first.licznik.getBase(), 10); 
-			LargeRational d = LargeRational(first);
 
-			Large v1 = Large::Set("0", first.licznik.getBase(), 10); 
-			Large v2 = Large::Set("1", first.licznik.getBase(), 10); 
-			LargeRational v3 = LargeRational(second);
+		/**
+			Metoda zwraca najwiêkszy wspólny dzielnik dwoch du¿ych liczb
+			Wynik GCD jest zawsze dodatni
+		*/
+		static Large GCD(Large first, Large second){
+			Large s = Large::Set("1", first.getBase(), 10); 
+			Large t = Large::Set("0", first.getBase(), 10); 
+			Large d = Large(first);
 
-			while(!(v3==Large::Set("0", first.licznik.getBase(), 10))){
+			Large v1 = Large::Set("0", first.getBase(), 10); 
+			Large v2 = Large::Set("1", first.getBase(), 10); 
+			Large v3 = Large(second);
+
+			Large zero = Large::Set("0", first.getBase(), 10);
+			while(!(v3.compare(zero)==0)){
 				//zmienna pomocnicza
-				LargeRational temp = d.divide(v3);
-				Large helper = temp.licznik/temp.mianownik;
+				d.fix();
+				v3.fix();
+				Large helper = d/v3;
 
 				//krok 1
-				Large t1 = s - (helper * v1);
+				Large test = (helper * v1);
+				test.fix();
+				Large t1 = s - test;
 				Large t2 = t - (helper * v2);
-				LargeRational t3 = d.substract(v3 * helper);
+				test = (v3 * helper);
+				Large t3 = d - test;
 
 				//krok2
 				s = v1;
@@ -96,6 +106,7 @@ class LargeRational {
 				v2 = t2;
 				v3 = t3;
 			}
+			d.setNegative(false);
 			return d;
 		}
 

@@ -168,6 +168,18 @@ void Tester::test_substract(){
 	if ((test1-test2) != Large::Set("-bc", base, in_base)){
 		cout << "Test_Sub7: " << test1.toString() << " " << test2.toString() << endl;
 	}
+	//test8
+	test1 = Large::Set("2ad", base, in_base);
+	test2 = Large::Set("29f", base, in_base);
+	if ((test1-test2) != Large::Set("e", base, in_base)){
+		cout << "Test_Sub8: " << test1.toString() << " " << test2.toString() << endl;
+	}
+	//test9
+	test1 = Large::Set("0001233", base, in_base);
+	test2 = Large::Set("567", base, in_base);
+	if ((test1-test2) != Large::Set("ccc", base, in_base)){
+		cout << "Test_Sub9: " << test1.toString() << " " << test2.toString() << endl;
+	}
 }
 	
 //test a*b
@@ -213,6 +225,24 @@ void Tester::test_multpily(){
 	test2 = Large::Set("-000a000", base, in_base);
 	if ((test1*test2) != Large::Set("64000000", base, in_base)){
 		cout << "Test_Mul7: " << test1.toString() << " " << test2.toString() << endl;
+	}
+	//test8
+	test1 = Large::Set("0", base, in_base);
+	test2 = Large::Set("111", base, in_base);
+	if ((test1*test2) != Large::Set("0", base, in_base)){
+		cout << "Test_Mul8: " << test1.toString() << " " << test2.toString() << endl;
+	}
+	//test9
+	test1 = Large::Set("155436", base, in_base);
+	test2 = Large::Set("0", base, in_base);
+	if ((test1*test2) != Large::Set("0", base, in_base)){
+		cout << "Test_Mul9: " << test1.toString() << " " << test2.toString() << endl;
+	}
+	//test10
+	test1 = Large::Set("5", base, in_base);
+	test2 = Large::Set("2ad", base, in_base);
+	if ((test1*test2) != Large::Set("d61", base, in_base)){
+		cout << "Test_Mul9: " << test1.toString() << " " << test2.toString() << endl;
 	}
 }
 
@@ -315,6 +345,14 @@ void Tester::test_divide(){
 	right = Large::Set("-5800", base, in_base);
 	if (left != right){
 		cout << "Test_Div12: " << test1.toString() << " " << test2.toString() << endl;
+	}
+	//test13
+	test1 = Large::Set("127", base, in_base);
+	test2 = Large::Set("113", base, in_base);
+	left = test1/test2;
+	right = Large::Set("1", base, in_base);
+	if (left != right){
+		cout << "Test_Div13: " << test1.toString() << " " << test2.toString() << endl;
 	}
 }
 

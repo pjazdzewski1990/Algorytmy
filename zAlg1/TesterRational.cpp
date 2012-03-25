@@ -11,10 +11,109 @@
 //uruchamiaj wszystkie testy po kolei
 void TesterRational::run(){
 	cout<< "Rational-start" <<endl;
+	//test_add();
+	test_GDC();
 	test_substract();
 	test_divide();
 	test_set();
 	cout<< "Rational-koniec" <<endl;
+}
+
+void TesterRational::test_add(){
+	//test1
+	LargeRational test1 = LargeRational::Set("123_1", base, in_base);
+	Large test2 = Large::Set("123_1",base,in_base);
+	Large result = Large::Set("246_1",base,in_base);
+	if (!(test1.add(test2) == result)){
+		cout << "Test_Add_Rational1: " << test1.toString() << " " << test2.toString() << " " << result.toString() << endl;
+	}
+}
+
+void TesterRational::test_GDC(){
+	//test1
+	Large test1 = Large::Set("123", base, in_base);
+	Large test2 = Large::Set("123",base,in_base);
+	Large result =Large::Set("123",base,in_base);
+	if (!(LargeRational::GCD(test1, test2) == result)){
+		cout << "Test_GDC_Rational1: " << test1.toString() << " " << test2.toString() << " " << result.toString() << endl;
+	}
+	//test2
+	test1 = Large::Set("80", base, in_base);
+	test2 = Large::Set("40",base,in_base);
+	result =Large::Set("40",base,in_base);
+	if (!(LargeRational::GCD(test1, test2) == result)){
+		cout << "Test_GDC_Rational2: " << test1.toString() << " " << test2.toString() << " " << result.toString() << endl;
+	}
+	//test3
+	test1 = Large::Set("1000", base, in_base);
+	test2 = Large::Set("125",base,in_base);
+	result =Large::Set("1",base,in_base);
+	if (!(LargeRational::GCD(test1, test2) == result)){
+		cout << "Test_GDC_Rational3: " << test1.toString() << " " << test2.toString() << " " << result.toString() << endl;
+	}
+	//test4
+	test1 = Large::Set("4321", base, in_base);
+	test2 = Large::Set("1234",base,in_base);
+	result = Large::Set("5",base,in_base);
+	if (!(LargeRational::GCD(test1, test2) == result)){
+		cout << "Test_GDC_Rational4: " << test1.toString() << " " << test2.toString() << " " << result.toString() << endl;
+	}
+	//test5
+	test1 = Large::Set("123321", base, in_base);
+	test2 = Large::Set("0a0",base,in_base);
+	result = Large::Set("1",base,in_base);
+	if (!(LargeRational::GCD(test1, test2) == result)){
+		cout << "Test_GDC_Rational5: " << test1.toString() << " " << test2.toString() << " " << result.toString() << endl;
+	}
+	//test6
+	test1 = Large::Set("123321", base, in_base);
+	test2 = Large::Set("0a0",base,in_base);
+	result = Large::Set("1",base,in_base);
+	if (!(LargeRational::GCD(test1, test2) == result)){
+		cout << "Test_GDC_Rational6: " << test1.toString() << " " << test2.toString() << " " << result.toString() << endl;
+	}
+	//test7
+	test1 = Large::Set("10", base, in_base);
+	test2 = Large::Set("ffbbaa",base,in_base);
+	result = Large::Set("2",base,in_base);
+	if (!(LargeRational::GCD(test1, test2) == result)){
+		cout << "Test_GDC_Rational7: " << test1.toString() << " " << test2.toString() << " " << result.toString() << endl;
+	}
+	//test8
+	test1 = Large::Set("1", base, in_base);
+	test2 = Large::Set("ffad213",base,in_base);
+	result = Large::Set("1",base,in_base);
+	if (!(LargeRational::GCD(test1, test2) == result)){
+		cout << "Test_GDC_Rational8: " << test1.toString() << " " << test2.toString() << " " << result.toString() << endl;
+	}
+	//test9
+	test1 = Large::Set("1123521", base, in_base);
+	test2 = Large::Set("1",base,in_base);
+	result = Large::Set("1",base,in_base);
+	if (!(LargeRational::GCD(test1, test2) == result)){
+		cout << "Test_GDC_Rational9: " << test1.toString() << " " << test2.toString() << " " << result.toString() << endl;
+	}
+	//test10
+	test1 = Large::Set("11", base, in_base);
+	test2 = Large::Set("1121",base,in_base);
+	result = Large::Set("1",base,in_base);
+	if (!(LargeRational::GCD(test1, test2) == result)){
+		cout << "Test_GDC_Rational10: " << test1.toString() << " " << test2.toString() << " " << result.toString() << endl;
+	}
+	//test11
+	test1 = Large::Set("a234", base, in_base);
+	test2 = Large::Set("234b",base,in_base);
+	result = Large::Set("1",base,in_base);
+	if (!(LargeRational::GCD(test1, test2) == result)){
+		cout << "Test_GDC_Rational11: " << test1.toString() << " " << test2.toString() << " " << result.toString() << endl;
+	}
+	//test12
+	test1 = Large::Set("a234", base, in_base);
+	test2 = Large::Set("b88cd404",base,in_base);
+	result = Large::Set("a234",base,in_base);
+	if (!(LargeRational::GCD(test1, test2) == result)){
+		cout << "Test_GDC_Rational12: " << test1.toString() << " " << test2.toString() << " " << result.toString() << endl;
+	}
 }
 
 void TesterRational::test_substract(){

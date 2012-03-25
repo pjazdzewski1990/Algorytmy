@@ -33,8 +33,8 @@ LargeRational LargeRational::add(LargeRational second){
 	if(second == 0){
 		return LargeRational(*this);
 	}
-	//TODO
-	long d = 1;//GCD(*this, second);
+
+	Large d = LargeRational::GCD(this->mianownik, second.mianownik);
 	if(d == 1){
 		LargeRational res = LargeRational(licznik*second.mianownik + mianownik*second.licznik, mianownik*second.mianownik);
 	}else{
@@ -45,8 +45,7 @@ LargeRational LargeRational::add(LargeRational second){
 		if(t1==0){
 			return LargeRational(Large::Set("0",licznik.getBase(), 10));
 		}else{
-			//TODO:
-			long e = 1; //GCD(t1, t1); //powinno byæ d
+			Large e = LargeRational::GCD(t1, d); 
 			LargeRational res = LargeRational(t1/e, t2/e);
 			return res;
 		}

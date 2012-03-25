@@ -29,4 +29,6 @@ class TesterRational{
 		void test_set();
 		void test_divide();
 		void test_substract();
+		void test_GDC();
+		void test_add();
 };

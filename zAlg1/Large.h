@@ -232,7 +232,6 @@ class Large
 
 			//na potrzeby profilera
 			addition_count++;
-
 			Large res(base);
 			
 			long left;
@@ -253,7 +252,7 @@ class Large
 				if(indexA >= 0){
 					left = lista[indexA];
 				}else{
-					right = 0;
+					left = 0;
 				}
 				//ustaw drug¹ wartoœæ
 				if(indexB >= 0){
@@ -628,6 +627,11 @@ class Large
 		zak³adamy, ¿e liczby s¹ tej samej bazy
 		*/
 		Large Karatsuba(Large second){
+			//mno¿enie coœ*0(0) i 0(0)*coœ 
+			Large zero = Large::Set("0", this->getBase(), 10);
+			if(this->compareAbsolute(zero)==0 || second.compareAbsolute(zero)==0 || this->lista.size()==0 || second.lista.size()==0){
+				return zero;
+			}
 
 			if(lista.size()!=second.lista.size() && lista.size()!=1 && second.lista.size()!=1){
 				//uzupelnij liczbe large zerami od lewej
