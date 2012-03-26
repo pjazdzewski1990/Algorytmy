@@ -24,25 +24,31 @@ string LargeRational::toHex(){
 
 /*
 	Metoda dodaje 2 liczby wymierne, 
-	 ignorujemy kwestie znaku, zak³adamy ¿e argumenty dodawania maj¹ tak¹ sam¹ podstawê
+	 ignorujemy kwestie znaku, 
+	 zak³adamy ¿e argumenty dodawania maj¹ tak¹ sam¹ podstawê
 */
 LargeRational LargeRational::add(LargeRational second){
-	if(*this == 0){
+	//zmienne pomocnicze
+	Large zero = Large::Set("0", licznik.getBase());
+	Large one = Large::Set("1", licznik.getBase());
+
+	if(licznik == zero){
 		return LargeRational(second);
 	}
-	if(second == 0){
+	if(second.licznik == zero){
 		return LargeRational(*this);
 	}
 
 	Large d = LargeRational::GCD(this->mianownik, second.mianownik);
-	if(d == 1){
+	if(d == one){
 		LargeRational res = LargeRational(licznik*second.mianownik + mianownik*second.licznik, mianownik*second.mianownik);
+		return res;
 	}else{
 		Large t1 = licznik * (second.mianownik/d);
 		t1 = t1 + second.licznik * (mianownik/d);
 		Large t2 = mianownik * (second.mianownik/d); 
 
-		if(t1==0){
+		if(t1 == zero){
 			return LargeRational(Large::Set("0",licznik.getBase(), 10));
 		}else{
 			Large e = LargeRational::GCD(t1, d); 

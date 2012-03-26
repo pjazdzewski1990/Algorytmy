@@ -51,9 +51,6 @@ Large Large::divide(Large v, Large& rest){
 	u = u * d;
 	v = v * d;
 
-	long j = u.lista.size() - v.lista.size();
-	long i=0;
-
 	//dodaj zero na pocz¹tku u jeœli d=1
 	if(d==1){
 		u.lista.insert(u.lista.begin(), 0);
@@ -63,9 +60,17 @@ Large Large::divide(Large v, Large& rest){
 	Large q(base);
 	q.setNegative(false);
 
+	long j = u.lista.size() - v.lista.size();
+	long i=0;
+
 	while(j >= i){
 		//przerwij jeœli U jest ju¿ mniejsze od V
 		if(u.compareAbsolute(v) == 1){
+			//ew. musimy jeszcze dodaæ brakuj¹ce zera na koniec 
+			while(j > i){
+				q.lista.push_back(0);
+				i++;
+			}
 			break;
 		}
 

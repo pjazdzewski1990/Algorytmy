@@ -19,13 +19,6 @@ class TesterRational{
 
 		//funkcje testuj¹ce Large
 		// 1 funkcja testuje 1 operacjê na ró¿nych przypadkach
-		/*void test_add();
-		void test_substract();
-		void test_multpily();
-		void test_divide();
-		void test_smaller();
-		void test_bigger();
-		void test_hex();*/
 		void test_set();
 		void test_divide();
 		void test_substract();

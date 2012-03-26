@@ -2,6 +2,8 @@
 #define _LARGERATIONAL_h_included_
 
 #include "Large.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 /*
 	Klasa do obs³ugi du¿ych liczb wymiernych
@@ -123,18 +125,45 @@ class LargeRational {
 		//OPERATORY
 		bool operator==(long val){
 			//obie liczby musz¹ byæ znormalizowane
-			return (licznik/mianownik)==val;
+			//pamiêtamy, ¿e nie mo¿na porównywaæ Large i long
+			char buffer [sizeof(long)*8+1];
+			_ltoa_s (val,buffer,10);
+			string str = string(buffer);
+			Large l = Large::Set(str, licznik.getBase(), 10); 
+			
+			Large zero = Large::Set("0", licznik.getBase(), 16);
+			Large rest = Large(licznik.getBase());
+
+			Large wynik = licznik.divide(mianownik, rest);
+
+			return (licznik/mianownik)==l && rest==zero;
 		}
+		
 		bool operator==(LargeRational second){
 			//obie liczby musz¹ byæ znormalizowane
 			return (licznik==second.licznik) && (mianownik==second.mianownik);
 		}
+
 		LargeRational operator*(Large l){
 			LargeRational lr(*this);
 			lr.licznik = lr.licznik * l;
 			return lr;
 		}
+		LargeRational operator+(LargeRational second){
+			LargeRational lr = this->add(second);
 
+			//algorytm podany na zajeciach nie zawsze zwraca poprawna wartoœæ
+			// patrz test numer 5
+			// potrzebna jest jeszcze rêczna korekta
+			Large gcd = LargeRational::GCD(lr.licznik, lr.mianownik);			
+			Large zero = Large::Set("0", lr.licznik.getBase()); 
+			if(!(gcd == zero)){
+				lr.licznik = lr.licznik/gcd;
+				lr.mianownik = lr.mianownik/gcd;
+			}
+			
+			return lr;
+		}
 };
 
 #endif

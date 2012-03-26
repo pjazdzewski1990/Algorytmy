@@ -11,7 +11,7 @@
 //uruchamiaj wszystkie testy po kolei
 void TesterRational::run(){
 	cout<< "Rational-start" <<endl;
-	//test_add();
+	test_add();
 	test_GDC();
 	test_substract();
 	test_divide();
@@ -22,10 +22,59 @@ void TesterRational::run(){
 void TesterRational::test_add(){
 	//test1
 	LargeRational test1 = LargeRational::Set("123_1", base, in_base);
-	Large test2 = Large::Set("123_1",base,in_base);
-	Large result = Large::Set("246_1",base,in_base);
-	if (!(test1.add(test2) == result)){
+	LargeRational test2 = LargeRational::Set("123_1",base,in_base);
+	LargeRational result = LargeRational::Set("246_1",base,in_base);
+	/*if (!(test1.add(test2) == result)){
 		cout << "Test_Add_Rational1: " << test1.toString() << " " << test2.toString() << " " << result.toString() << endl;
+	}
+	//test2
+	test1 = LargeRational::Set("1_321", base, in_base);
+	test2 = LargeRational::Set("1_321",base,in_base);
+	result = LargeRational::Set("2_321",base,in_base);
+	if (!(test1.add(test2) == result)){
+		cout << "Test_Add_Rational2: " << test1.toString() << " " << test2.toString() << " " << result.toString() << endl;
+	}
+	//test3
+	test1 = LargeRational::Set("7_42", base, in_base);
+	test2 = LargeRational::Set("11_c",base,in_base);
+	result = LargeRational::Set("43_2c",base,in_base);
+	if (!(test1.add(test2) == result)){
+		cout << "Test_Add_Rational3: " << test1.toString() << " " << test2.toString() << " " << result.toString() << endl;
+	}
+	//test4
+	test1 = LargeRational::Set("123_1", base, in_base);
+	test2 = LargeRational::Set("1_123",base,in_base);
+	result = LargeRational::Set("14aca_123",base,in_base);
+	if (!(test1.add(test2) == result)){
+		cout << "Test_Add_Rational4: " << test1.toString() << " " << test2.toString() << " " << result.toString() << endl;
+	}
+	//test5
+	test1 = LargeRational::Set("23_521", base, in_base);
+	test2 = LargeRational::Set("401_500",base,in_base);
+	result = LargeRational::Set("43e6d_52100",base,in_base);
+	if (!(test1+test2 == result)){
+		cout << "Test_Add_Rational5: " << test1.toString() << " " << test2.toString() << " " << result.toString() << endl;
+	}
+	//test6
+	test1 = LargeRational::Set("0_100", base, in_base);
+	test2 = LargeRational::Set("52_456",base,in_base);
+	result = LargeRational::Set("29_22b",base,in_base);
+	if (!(test1+test2 == result)){
+		cout << "Test_Add_Rational6: " << test1.toString() << " " << test2.toString() << " " << result.toString() << endl;
+	}
+	//test7
+	test1 = LargeRational::Set("4d2_1964", base, in_base);
+	test2 = LargeRational::Set("3fb_26aa",base,in_base);
+	result = LargeRational::Set("23ee10_7ab68d",base,in_base);
+	if (!(test1+test2 == result)){
+		cout << "Test_Add_Rational7: " << test1.toString() << " " << test2.toString() << " " << result.toString() << endl;
+	}*/
+	//test8
+	test1 = LargeRational::Set("3e9_1068", base, in_base);
+	test2 = LargeRational::Set("1151_457",base,in_base);
+	result = LargeRational::Set("3e8f3_ecb8",base,in_base);
+	if (!(test1+test2 == result)){
+		cout << "Test_Add_Rational8: " << test1.toString() << " " << test2.toString() << " " << result.toString() << endl;
 	}
 }
 

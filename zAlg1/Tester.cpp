@@ -20,7 +20,7 @@ void Tester::run(){
 	cout<< "Test-koniec" <<endl;
 }
 
-//testuj dodawanie a+b
+//testuj
 void Tester::test_hex(){
 	//test1
 	Large test1 = Large::Set("aaa123", base, in_base);
@@ -353,6 +353,20 @@ void Tester::test_divide(){
 	right = Large::Set("1", base, in_base);
 	if (left != right){
 		cout << "Test_Div13: " << test1.toString() << " " << test2.toString() << endl;
+	}
+	//test14
+	test1 = Large::Set("12d1117", base, in_base);
+	test2 = Large::Set("4d", base, in_base);
+	left = test1/test2;
+	right = Large::Set("3e8f3", base, in_base);
+	if (left != right){
+		cout << "Test_Div14: " << test1.toString() << " " << test2.toString() << endl;
+	}
+	//test 15
+	test1 = Large::Set("473358", base, in_base);
+	test2 = Large::Set("4d", base, in_base);
+	if ((test1/test2) != Large::Set("ecb8", base, in_base)){
+		cout << "Test_Div15: " << test1.toString() << " " << test2.toString() << endl;
 	}
 }
 
