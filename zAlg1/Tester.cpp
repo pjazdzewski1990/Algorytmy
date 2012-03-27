@@ -368,6 +368,12 @@ void Tester::test_divide(){
 	if ((test1/test2) != Large::Set("ecb8", base, in_base)){
 		cout << "Test_Div15: " << test1.toString() << " " << test2.toString() << endl;
 	}
+	//test 16
+	test1 = Large::Set("221", base, in_base);
+	test2 = Large::Set("5", base, in_base);
+	if ((test1/test2) != Large::Set("6d", base, in_base)){
+		cout << "Test_Div16: " << test1.toString() << " " << test2.toString() << endl;
+	}
 }
 
 //czy pierwszy element jest mniejszy od drugiego

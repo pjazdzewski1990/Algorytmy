@@ -11,6 +11,7 @@
 //uruchamiaj wszystkie testy po kolei
 void TesterRational::run(){
 	cout<< "Rational-start" <<endl;
+	test_mul();
 	test_add();
 	test_GDC();
 	test_substract();
@@ -19,12 +20,43 @@ void TesterRational::run(){
 	cout<< "Rational-koniec" <<endl;
 }
 
+void TesterRational::test_mul(){
+	//test1
+	LargeRational test1 = LargeRational::Set("0_100", base, in_base);
+	LargeRational test2 = LargeRational::Set("1_2001",base,in_base);
+	LargeRational result = LargeRational::Set("0_1",base,in_base);
+	if (!(test1.mul(test2) == result)){
+		cout << "Test_Mul_Rational1: " << test1.toString() << " " << test2.toString() << " " << result.toString() << endl;
+	}
+	//test2
+	test1 = LargeRational::Set("21341_1200", base, in_base);
+	test2 = LargeRational::Set("0_221",base,in_base);
+	result = LargeRational::Set("0_1",base,in_base);
+	if (!(test1.mul(test2) == result)){
+		cout << "Test_Mul_Rational2: " << test1.toString() << " " << test2.toString() << " " << result.toString() << endl;
+	}
+	//test3
+	test1 = LargeRational::Set("122_321", base, in_base);
+	test2 = LargeRational::Set("15_221",base,in_base);
+	result = LargeRational::Set("196_71af",base,in_base);
+	if (!(test1.mul(test2) == result)){
+		cout << "Test_Mul_Rational3: " << test1.toString() << " " << test2.toString() << " " << result.toString() << endl;
+	}
+	//test4
+	test1 = LargeRational::Set("21341_1200", base, in_base);
+	test2 = LargeRational::Set("0_221",base,in_base);
+	result = LargeRational::Set("0_1",base,in_base);
+	if (!(test1.mul(test2) == result)){
+		cout << "Test_Mul_Rational4: " << test1.toString() << " " << test2.toString() << " " << result.toString() << endl;
+	}
+}
+
 void TesterRational::test_add(){
 	//test1
 	LargeRational test1 = LargeRational::Set("123_1", base, in_base);
 	LargeRational test2 = LargeRational::Set("123_1",base,in_base);
 	LargeRational result = LargeRational::Set("246_1",base,in_base);
-	/*if (!(test1.add(test2) == result)){
+	if (!(test1.add(test2) == result)){
 		cout << "Test_Add_Rational1: " << test1.toString() << " " << test2.toString() << " " << result.toString() << endl;
 	}
 	//test2
@@ -68,7 +100,7 @@ void TesterRational::test_add(){
 	result = LargeRational::Set("23ee10_7ab68d",base,in_base);
 	if (!(test1+test2 == result)){
 		cout << "Test_Add_Rational7: " << test1.toString() << " " << test2.toString() << " " << result.toString() << endl;
-	}*/
+	}
 	//test8
 	test1 = LargeRational::Set("3e9_1068", base, in_base);
 	test2 = LargeRational::Set("1151_457",base,in_base);

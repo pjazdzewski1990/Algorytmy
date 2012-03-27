@@ -24,4 +24,5 @@ class TesterRational{
 		void test_substract();
 		void test_GDC();
 		void test_add();
+		void test_mul();
 };

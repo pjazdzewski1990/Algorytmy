@@ -34,33 +34,6 @@ int main(int argc, char* argv[])
 	//cout << "Podaj baze systemu w ktorym bêdziesz podawa³: ";
 	//cin >> in_base;
 
-	//DEMO
-	/*while(true){
-		string A;
-		cout << "Podaj liczbê A w systemie o podstawie "<< in_base << ":" << endl;
-		cin >> A;
-		Large liczbaA = Large::Set(A, base, in_base);
-		cout << liczbaA.toString() << endl;
-	
-		string B;
-		cout << "Podaj liczbê B w systemie o podstawie "<< in_base << ":" << endl;
-		cin >> B;
-		Large liczbaB = Large::Set(B, base, in_base);
-		cout << liczbaB.toString() << endl;
-
-		Large liczbaC = liczbaA.simpleAdd(liczbaB);
-		cout << "Wynik " << liczbaC.toString() << endl;
-	
-		bool b = (liczbaC == liczbaB.simpleAdd(liczbaA));
-		cout << b << endl;
-
-		Large liczbaD = liczbaA.Karatsuba(liczbaB);
-		cout << liczbaD.toString() << endl;
-
-		Large conv = Large::convert(liczbaA, 16);
-		cout << conv.toHex() << endl;
-	}*/
-
 	string liczba1;
 	string liczba2;
 	char command;
@@ -104,6 +77,13 @@ int main(int argc, char* argv[])
 				cout << "Nie poprawny operator" << endl;
 		}
 	//}*/
+
+		//test 16
+	Large test1 = Large::Set("221", base, in_base);
+	Large test2 = Large::Set("5", base, in_base);
+	if ((test1/test2) != Large::Set("6d", base, in_base)){
+		cout << "saddsa: " << test1.toString() << " " << test2.toString() << endl;
+	}
 
 	TesterRational tt = TesterRational();
 	tt.run();

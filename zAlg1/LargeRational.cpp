@@ -77,3 +77,38 @@ LargeRational LargeRational::substract(LargeRational arg){
 	LargeRational res = LargeRational(licznik*arg.mianownik - arg.licznik*mianownik, mianownik*arg.mianownik); 
 	return res;
 }
+
+/*
+	Mno¿ymy dwie dlugie liczby rzeczywiste.
+	Zak³adamy, ¿e s¹ tej samej podstawy.
+	Ignorujemy kwestie znaku
+*/
+LargeRational LargeRational::mul(LargeRational second){
+	//LargeRational res(licznik*second.licznik, mianownik* second.mianownik);
+	Large zero = Large::Set("0", licznik.getBase(), 10);
+	Large one = Large::Set("1", licznik.getBase(), 10);
+	LargeRational res = LargeRational(zero, one);
+
+	if(*this == zero || second == zero){
+		return res;
+	}
+
+	Large d1 = LargeRational::GCD(licznik, second.mianownik);
+	Large d2 = LargeRational::GCD(second.licznik, mianownik);
+	if(d1 == one){
+		res.licznik = licznik;
+		res.mianownik = second.mianownik; 
+	}else{
+		res.licznik = (licznik/d1);
+		res.mianownik = (second.mianownik/d1); 
+	}
+	if(d2 == one){
+		res.licznik = (second.licznik * res.licznik);
+		res.mianownik = (mianownik * res.mianownik);
+	}else{
+		res.licznik = (second.licznik/d2) * res.licznik;
+		Large test = (mianownik/d2);
+		res.mianownik = (mianownik/d2) * res.mianownik;
+	}
+	return res;
+}

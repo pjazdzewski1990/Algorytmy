@@ -141,12 +141,24 @@ class LargeRational {
 		
 		bool operator==(LargeRational second){
 			//obie liczby musz¹ byæ znormalizowane
-			return (licznik==second.licznik) && (mianownik==second.mianownik);
+			return ( (licznik==second.licznik) && (mianownik==second.mianownik) ) || 
+				( (licznik==second.licznik) && (licznik==Large::Set("0", licznik.getBase(), 10)) );
 		}
 
 		LargeRational operator*(Large l){
 			LargeRational lr(*this);
 			lr.licznik = lr.licznik * l;
+			return lr;
+		}
+		LargeRational operator*(LargeRational l){
+			LargeRational lr = mul(l);
+			if(licznik.isNegative() != l.licznik.isNegative()){
+				lr.licznik.setNegative(true);
+				lr.mianownik.setNegative(false);
+			}else{
+				lr.licznik.setNegative(false);
+				lr.mianownik.setNegative(false);
+			}
 			return lr;
 		}
 		LargeRational operator+(LargeRational second){

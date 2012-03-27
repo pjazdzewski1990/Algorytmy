@@ -52,9 +52,9 @@ Large Large::divide(Large v, Large& rest){
 	v = v * d;
 
 	//dodaj zero na pocz¹tku u jeœli d=1
-	if(d==1){
+	//if(d==1){
 		u.lista.insert(u.lista.begin(), 0);
-	}
+	//}
 
 	//zgodnie z algorytmem z zajêæ
 	Large q(base);
