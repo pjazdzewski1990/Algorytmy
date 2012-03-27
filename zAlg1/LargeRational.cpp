@@ -84,7 +84,9 @@ LargeRational LargeRational::substract(LargeRational arg){
 	Ignorujemy kwestie znaku
 */
 LargeRational LargeRational::mul(LargeRational second){
-	//LargeRational res(licznik*second.licznik, mianownik* second.mianownik);
+	fix();
+	second.fix();
+
 	Large zero = Large::Set("0", licznik.getBase(), 10);
 	Large one = Large::Set("1", licznik.getBase(), 10);
 	LargeRational res = LargeRational(zero, one);
@@ -103,12 +105,30 @@ LargeRational LargeRational::mul(LargeRational second){
 		res.mianownik = (second.mianownik/d1); 
 	}
 	if(d2 == one){
-		res.licznik = (second.licznik * res.licznik);
+		res.licznik = (res.licznik * second.licznik);
 		res.mianownik = (mianownik * res.mianownik);
 	}else{
 		res.licznik = (second.licznik/d2) * res.licznik;
 		Large test = (mianownik/d2);
 		res.mianownik = (mianownik/d2) * res.mianownik;
 	}
+	res.fix();
 	return res;
+}
+
+LargeRational LargeRational::simpleMul(LargeRational second){
+	fix();
+	second.fix();
+	LargeRational lr = LargeRational(licznik*second.licznik, mianownik*second.mianownik);
+	lr.fix();
+	Large gcd = LargeRational::GCD(lr.licznik, lr.mianownik);
+	lr.licznik = lr.licznik/gcd;
+	lr.mianownik = lr.mianownik/gcd;
+	lr.fix();
+	return lr;
+}
+
+void LargeRational::fix(){
+	licznik.fix();
+	mianownik.fix();
 }

@@ -24,12 +24,6 @@ class Large
 		//czy liczba jest ujemna 
 		bool negative;
 
-		//lista przechowuj¹ca kolejne cyfry liczby 
-		// zapisanej w systemie o bazie base
-		// liczby "od lewej"(ma³e indeksy) maj¹ najwiêksz¹ potêgê
-		vector<long> lista;
-
-
 		static int charToLong(char c){
 			return c-48;
 		}
@@ -198,6 +192,13 @@ class Large
 		}
 
 	public:
+		//TODO: chwilowo przeniesione do publicznych
+		// patrz test_sub 10
+		//lista przechowuj¹ca kolejne cyfry liczby 
+		// zapisanej w systemie o bazie base
+		// liczby "od lewej"(ma³e indeksy) maj¹ najwiêksz¹ potêgê
+		vector<long> lista;
+
 		//defaultowy konstruktor na potrzeby LargeRational
 		Large(){
 			Large(16);
@@ -627,6 +628,7 @@ class Large
 		zak³adamy, ¿e liczby s¹ tej samej bazy
 		*/
 		Large Karatsuba(Large second){
+
 			//mno¿enie coœ*0(0) i 0(0)*coœ 
 			Large zero = Large::Set("0", this->getBase(), 10);
 			if(this->compareAbsolute(zero)==0 || second.compareAbsolute(zero)==0 || this->lista.size()==0 || second.lista.size()==0){
@@ -696,6 +698,7 @@ class Large
 				}else{
 					m = lista.size()/2;
 				}
+
 				Large wynik = X << (2*m);
 				wynik = wynik.simpleAdd(Z << m);
 				wynik = wynik.simpleAdd(Y);

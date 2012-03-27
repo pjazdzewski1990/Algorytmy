@@ -78,12 +78,6 @@ int main(int argc, char* argv[])
 		}
 	//}*/
 
-		//test 16
-	Large test1 = Large::Set("221", base, in_base);
-	Large test2 = Large::Set("5", base, in_base);
-	if ((test1/test2) != Large::Set("6d", base, in_base)){
-		cout << "saddsa: " << test1.toString() << " " << test2.toString() << endl;
-	}
 
 	TesterRational tt = TesterRational();
 	tt.run();

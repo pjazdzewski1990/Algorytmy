@@ -180,6 +180,22 @@ void Tester::test_substract(){
 	if ((test1-test2) != Large::Set("ccc", base, in_base)){
 		cout << "Test_Sub9: " << test1.toString() << " " << test2.toString() << endl;
 	}
+	//test10
+	test1 = Large::Set("101234567", base, in_base);
+	test1.lista.insert(test1.lista.begin(),0);
+	test1.lista.insert(test1.lista.begin(),0);
+
+	test2 = Large::Set("542311", base, in_base);
+	//dodatkowe zera na pocz¹tku
+	test2.lista.insert(test2.lista.begin(),0);
+	test2.lista.insert(test2.lista.begin(),0);
+	test2.lista.insert(test2.lista.begin(),0);
+	test2.lista.insert(test2.lista.begin(),0);
+
+	Large result = (test1-test2);
+	if (result != Large::Set("100cf1356", base, in_base)){
+		cout << "Test_Sub10: " << test1.toString() << " " << test2.toString() << endl;
+	}
 }
 	
 //test a*b

@@ -69,6 +69,7 @@ class LargeRational {
 
 		LargeRational add(LargeRational second);
 		LargeRational mul(LargeRational second);
+		LargeRational simpleMul(LargeRational second);
 
 		/**
 			Metoda zwraca najwiêkszy wspólny dzielnik dwoch du¿ych liczb
@@ -121,6 +122,11 @@ class LargeRational {
 			Typowe (szkolne) odejmowanie u³amków
 		*/
 		LargeRational substract(LargeRational arg);
+
+		/*
+		Fix dla rzeczywistej
+		*/
+		void fix();
 
 		//OPERATORY
 		bool operator==(long val){

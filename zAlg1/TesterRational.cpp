@@ -25,29 +25,50 @@ void TesterRational::test_mul(){
 	LargeRational test1 = LargeRational::Set("0_100", base, in_base);
 	LargeRational test2 = LargeRational::Set("1_2001",base,in_base);
 	LargeRational result = LargeRational::Set("0_1",base,in_base);
-	if (!(test1.mul(test2) == result)){
+	if (!(test1*test2 == result)){
 		cout << "Test_Mul_Rational1: " << test1.toString() << " " << test2.toString() << " " << result.toString() << endl;
 	}
 	//test2
 	test1 = LargeRational::Set("21341_1200", base, in_base);
 	test2 = LargeRational::Set("0_221",base,in_base);
 	result = LargeRational::Set("0_1",base,in_base);
-	if (!(test1.mul(test2) == result)){
+	if (!(test1*test2 == result)){
 		cout << "Test_Mul_Rational2: " << test1.toString() << " " << test2.toString() << " " << result.toString() << endl;
 	}
 	//test3
 	test1 = LargeRational::Set("122_321", base, in_base);
 	test2 = LargeRational::Set("15_221",base,in_base);
 	result = LargeRational::Set("196_71af",base,in_base);
-	if (!(test1.mul(test2) == result)){
+	if (!(test1 * test2 == result)){
 		cout << "Test_Mul_Rational3: " << test1.toString() << " " << test2.toString() << " " << result.toString() << endl;
 	}
 	//test4
-	test1 = LargeRational::Set("21341_1200", base, in_base);
-	test2 = LargeRational::Set("0_221",base,in_base);
-	result = LargeRational::Set("0_1",base,in_base);
-	if (!(test1.mul(test2) == result)){
+	test1 = LargeRational::Set("4af_ccc", base, in_base);
+	test2 = LargeRational::Set("109_139",base,in_base);
+	result = LargeRational::Set("4d927_fa56c",base,in_base);
+	if (!(test1 * test2 == result)){
 		cout << "Test_Mul_Rational4: " << test1.toString() << " " << test2.toString() << " " << result.toString() << endl;
+	}
+	//test5
+	test1 = LargeRational::Set("4af4af_abc", base, in_base);
+	test2 = LargeRational::Set("111_122",base,in_base);
+	result = LargeRational::Set("1aa4fa35_40da8",base,in_base);
+	if (!(test1 * test2 == result)){
+		cout << "Test_Mul_Rational5: " << test1.toString() << " " << test2.toString() << " " << result.toString() << endl;
+	}
+	//test6
+	test1 = LargeRational::Set("1_abcdef", base, in_base);
+	test2 = LargeRational::Set("1_223322",base,in_base);
+	result = LargeRational::Set("1_16f3aa95f6be",base,in_base);
+	if (!(test1 * test2 == result)){
+		cout << "Test_Mul_Rational6: " << test1.toString() << " " << test2.toString() << " " << result.toString() << endl;
+	}
+	//test7
+	test1 = LargeRational::Set("0_cdef", base, in_base);
+	test2 = LargeRational::Set("1_3322",base,in_base);
+	result = LargeRational::Set("0_2921f6be",base,in_base);//w tym przypadku mianownik jest zupe³nie dowolny bo 0/a==0/b
+	if (!(test1 * test2 == result)){
+		cout << "Test_Mul_Rational7: " << test1.toString() << " " << test2.toString() << " " << result.toString() << endl;
 	}
 }
 
