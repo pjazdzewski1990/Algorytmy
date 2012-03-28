@@ -42,6 +42,10 @@ int main(int argc, char* argv[])
 	Large l2(base);
 	Large res(base);
 
+	LargeRational u1(base);
+	LargeRational u2(base);
+	LargeRational wynik(base);
+
 	/*while(true){
 		cin>>liczba1>>command>>liczba2;
 		l1 = Large::Set(liczba1, base, in_base);
@@ -77,14 +81,32 @@ int main(int argc, char* argv[])
 				cout << "Nie poprawny operator" << endl;
 		}
 	//}*/
+	/*while(true){
+		cin>>liczba1>>command>>liczba2;
+		u1 = LargeRational::Set(liczba1, base, in_base);
+		u2 = LargeRational::Set(liczba2, base, in_base);
+		switch(command){
+			case '+':
+				wynik = u1 + u2;
+				//res = Large::convert(res, 16);
+				cout << wynik.toHex() << endl;
+				break;
+			case '*':
+				wynik = u1 * u2;
+				//res = Large::convert(res, 16);
+				cout << res.toHex() << endl;
+				break;
+			default:
+				cout << "Nie poprawny operator" << endl;
+		}
+	}*/
 
-
-	TesterRational tt = TesterRational();
+	/*TesterRational tt = TesterRational();
 	tt.run();
 	Tester t = Tester();
 	t.run();
 
-	cin >>command;
+	cin >>command;*/
 	return 0;
 }
 

@@ -2,6 +2,7 @@
 
 #include "TesterRational.h"
 #include "LargeRational.h"
+//to nale¿y wykomentowaæ przed komplicj¹ z gcc
 #include "LargeRational.cpp"
 #include "Large.h"
 

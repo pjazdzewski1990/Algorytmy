@@ -1,4 +1,5 @@
-
+#ifndef _LARGE_TEST_h_included_
+#define _LARGE_TEST_h_included_
 
 #include "LargeRational.h"
 #include "Large.h"
@@ -30,3 +31,5 @@ class Tester{
 		void test_hex();
 
 };
+
+#endif

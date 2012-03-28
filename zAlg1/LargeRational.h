@@ -23,7 +23,7 @@ class LargeRational {
 			licznik = _licznik;
 			mianownik = _mianownik;
 		}
-		LargeRational(LargeRational& wzor){
+		LargeRational(const LargeRational& wzor){
 			licznik = wzor.licznik;
 			mianownik = wzor.mianownik;
 		}
@@ -51,7 +51,8 @@ class LargeRational {
 		static LargeRational Set(long base, Large licznik, Large mianownik){
 			Large _licznik = Large::convert(licznik, base);
 			Large _mianownik = Large::convert(mianownik, base);
-			return LargeRational(_licznik, _mianownik);
+			LargeRational res(_licznik, _mianownik);
+			return res;
 		}
 		static LargeRational Set(string num, int base, int in_base=10){
 			int pos = num.find("_");
@@ -60,7 +61,7 @@ class LargeRational {
 				licznik = num.substr(0, pos);
 			}
 			string mianownik = "1";
-			if(pos != -1 && pos != num.length()-1){
+			if(pos != -1 && pos != (signed)num.length()-1){
 				mianownik = num.substr(pos+1);
 			}
 			LargeRational res(Large::Set(licznik, base, in_base), Large::Set(mianownik, base, in_base));
@@ -133,7 +134,8 @@ class LargeRational {
 			//obie liczby musz¹ byæ znormalizowane
 			//pamiêtamy, ¿e nie mo¿na porównywaæ Large i long
 			char buffer [sizeof(long)*8+1];
-			_ltoa_s (val,buffer,10);
+			//_ltoa_s (val,buffer,10);
+			sprintf (buffer, "%ld", val);
 			string str = string(buffer);
 			Large l = Large::Set(str, licznik.getBase(), 10); 
 			
@@ -156,8 +158,9 @@ class LargeRational {
 			lr.licznik = lr.licznik * l;
 			return lr;
 		}
+
 		LargeRational operator*(LargeRational l){
-			LargeRational lr = mul(l);
+			LargeRational lr = LargeRational(mul(l));
 			if(licznik.isNegative() != l.licznik.isNegative()){
 				lr.licznik.setNegative(true);
 				lr.mianownik.setNegative(false);

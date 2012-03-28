@@ -1,5 +1,8 @@
+#ifndef _LARGERATIONAL_TEST_h_included_
+#define _LARGERATIONAL_TEST_h_included_
 
 #include "LargeRational.h"
+#include "Large.h"
 
 using namespace std;
 
@@ -26,3 +29,5 @@ class TesterRational{
 		void test_add();
 		void test_mul();
 };
+
+#endif
