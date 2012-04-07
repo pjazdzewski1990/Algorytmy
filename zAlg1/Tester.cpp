@@ -9,6 +9,7 @@
 void Tester::run(){
 	cout<< "Test-start" <<endl;
 
+	test_rest();
 	test_hex();
 	test_divide();
 	test_multpily();
@@ -18,6 +19,64 @@ void Tester::run(){
 	test_substract();
 
 	cout<< "Test-koniec" <<endl;
+}
+
+//testuj resztê zwracan¹ przez metode divide
+void Tester::test_rest(){
+	//test0
+	Large test1 = Large::Set("1004", base, in_base);
+	Large test2 = Large::Set("24c", base, in_base);
+	Large rest = Large(base);
+	test1.divide(test2, rest);
+	Large expected = Large::Set("23c", base, in_base); 
+	if (rest != expected){
+		cout << "Test_Rest0: " << test1.toString() << " " << test2.toString() << endl;
+	}
+	//test1
+	test1 = Large::Set("1234", base, in_base);
+	test2 = Large::Set("23c", base, in_base);
+	rest = Large(base);
+	test1.divide(test2, rest);
+	expected = Large::Set("54", base, in_base); 
+	if (rest != expected){
+		cout << "Test_Rest1: " << test1.toString() << " " << test2.toString() << endl;
+	}
+	//test2
+	test1 = Large::Set("4321", base, in_base);
+	test2 = Large::Set("1234", base, in_base);
+	rest = Large(base);
+	test1.divide(test2, rest);
+	expected = Large::Set("c85", base, in_base); 
+	if (rest != expected){
+		cout << "Test_Rest2: " << test1.toString() << " " << test2.toString() << endl;
+	}
+	//test3
+	test1 = Large::Set("43210", base, in_base);
+	test2 = Large::Set("12", base, in_base);
+	rest = Large(base);
+	test1.divide(test2, rest);
+	expected = Large::Set("a", base, in_base); 
+	if (rest != expected){
+		cout << "Test_Rest3: " << test1.toString() << " " << test2.toString() << endl;
+	}
+	//test4
+	test1 = Large::Set("456", base, in_base);
+	test2 = Large::Set("400", base, in_base);
+	rest = Large(base);
+	test1.divide(test2, rest);
+	expected = Large::Set("56", base, in_base); 
+	if (rest != expected){
+		cout << "Test_Rest4: " << test1.toString() << " " << test2.toString() << endl;
+	}
+	//test4
+	test1 = Large::Set("356", base, in_base);
+	test2 = Large::Set("400", base, in_base);
+	rest = Large(base);
+	test1.divide(test2, rest);
+	expected = Large::Set("356", base, in_base); 
+	if (rest != expected){
+		cout << "Test_Rest5: " << test1.toString() << " " << test2.toString() << endl;
+	}
 }
 
 //testuj
@@ -443,3 +502,4 @@ void Tester::test_bigger(){
 		cout << "Test_Bigger5: " << test1.toString() << " " << test2.toString() << endl;
 	}
 }
+

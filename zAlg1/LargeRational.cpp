@@ -3,6 +3,8 @@
 #include "Large.h"
 #include "LargeRational.h"
 
+#include <vector>
+
 
 string LargeRational::toHex(){
 	stringstream ss;

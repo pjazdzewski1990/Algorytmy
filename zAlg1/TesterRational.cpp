@@ -8,10 +8,14 @@
 
 #include <string>
 #include <iostream>
+#include <time.h>
+#include <vector>
+#include <cstdlib>
 
 //uruchamiaj wszystkie testy po kolei
 void TesterRational::run(){
 	cout<< "Rational-start" <<endl;
+	autotest_GDC(100000);
 	test_mul();
 	test_add();
 	test_GDC();
@@ -19,6 +23,39 @@ void TesterRational::run(){
 	test_divide();
 	test_set();
 	cout<< "Rational-koniec" <<endl;
+}
+
+void TesterRational::autotest_GDC(int len){
+	int i;
+	Large x[3];
+	vector<Large> y;
+
+	for (i = 0; i < 30; i++) {
+		x[0] = Large::Set(randomString(len), base, in_base);
+		x[1] = Large::Set(randomString(len), base, in_base);
+		x[2] = Large::Set(randomString(len), base, in_base);
+		Large ga = LargeRational::GCD(x,3);
+		ga.fix();
+		Large gb = LargeRational::GCD(LargeRational::GCD(x[0], x[1]),x[2]);
+		gb.fix();
+		if (ga != gb) {
+			for (int j = 0; j < 3; j++)	cout << x[j].toHex() << " ";
+			cout << "A:Error " << ga.toHex() << " != "<< gb.toHex() << endl;  
+		}
+
+		y.push_back(x[0]);
+		y.push_back(x[1]);
+		y.push_back(x[2]);
+		ga = LargeRational::GCD(y);
+		ga.fix();
+		gb = LargeRational::GCD(LargeRational::GCD(y[0], y[1]), y[2]);
+		gb.fix();
+		if (ga != gb) {
+			for (int j = 0; j < 3; j++)	cout << y[j].toHex() << " ";
+			cout << "B:Error " << ga.toHex() << " != "<< gb.toHex() << endl;  
+		}
+		y.clear();
+	}
 }
 
 void TesterRational::test_mul(){
@@ -349,4 +386,18 @@ void TesterRational::test_set(){
 	if (!(test1 == test2)){
 		cout << "Test_Set_Rational5: " << test1.toString() << " " << test2.toString() << endl;
 	}
+}
+
+string TesterRational::randomString(int max_length){
+	srand( time(NULL) );
+	long number = rand();
+	number = abs(number%max_length);
+	//cout << "Los " << number << endl;
+	number++;
+	string res = "";
+	while(number>0){
+		res.append(1,number%10+'0');
+		number/=10;
+	}
+	return res;
 }

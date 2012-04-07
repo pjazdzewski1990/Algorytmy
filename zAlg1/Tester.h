@@ -29,6 +29,7 @@ class Tester{
 		void test_smaller();
 		void test_bigger();
 		void test_hex();
+		void test_rest();
 
 };
 

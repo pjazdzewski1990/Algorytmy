@@ -35,7 +35,7 @@ Large Large::divide(Large v, Large& rest){
 	}
 	//równe liczby
 	if(u==v){
-		rest = Large(base);
+		rest = Large::Set("0", base, 16);
 		Large res = Large(base);
 		res.setNegative(false);
 		res.lista.push_back(1);
@@ -116,8 +116,13 @@ Large Large::divide(Large v, Large& rest){
 		}
 		i++;
 	}
-	rest = u;
+	//by otrzymaæ poprawn¹ resztê trzeba jeszcze podzieliæ przez d
+	Large dd = Large(base);
+	dd.lista.push_back(d);
+	dd.fix();
+	rest = u.divide(dd,Large(base));
 	rest.fix();
+
 	q.fix();
 	return q;
 }

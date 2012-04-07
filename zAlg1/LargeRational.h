@@ -115,6 +115,54 @@ class LargeRational {
 		}
 
 		/**
+			GCD dla wielu liczb
+			sposób pierwszy
+		*/
+		static Large GCD(Large numbers[], long size){
+			Large result = numbers[0];
+
+			for(int i=1; i<size; i++){
+				result = LargeRational::GCD(result,numbers[i]);
+			}
+
+			result.fix();
+			return result;
+		}
+		
+		/**
+			GCD dla wielu liczb
+			sposób drugi
+		*/
+		static Large GCD(vector<Large> numbers){
+			Large min = numbers[0];
+			long base = min.getBase();
+			Large zero = Large::Set("0", base, 16);
+
+			do{
+				min = numbers[0];
+				for(int i=0; i<(int)numbers.size(); i++){
+					if(min > numbers[i]){
+						min = numbers[i];
+					}
+				}
+				
+				for(int i=0; i<(int)numbers.size(); i++){
+					Large rest(base);
+					numbers[i].divide(min , rest);
+					if(rest != zero){
+						numbers[i] = rest;
+					}else{
+						numbers.erase(numbers.begin()+i);
+						i=0;
+					}
+				}
+			}while(numbers.size()>0);
+			
+			min.fix();
+			return min;
+		}
+
+		/**
 			Dzielenie dwóch ulamków na zasadzie mno¿enia z liczb¹ odwrotn¹ 
 		*/
 		LargeRational divide(LargeRational arg2);

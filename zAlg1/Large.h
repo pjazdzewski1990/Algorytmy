@@ -18,6 +18,11 @@ extern long addition_count;
 class Large
 {
 	private:
+		//lista przechowuj¹ca kolejne cyfry liczby 
+		// zapisanej w systemie o bazie base
+		// liczby "od lewej"(ma³e indeksy) maj¹ najwiêksz¹ potêgê
+		vector<long> lista;
+
 		//wewnêtrzna podstawa systemu
 		long base;
 
@@ -84,7 +89,7 @@ class Large
 			return ret;
 		}
 
-		//TODO: nei uzywana
+		//TODO: nie uzywana
 		bool isPowerOf2(long l){
 			while(true){
 				if(l%2 != 0){
@@ -192,13 +197,6 @@ class Large
 		}
 
 	public:
-		//TODO: chwilowo przeniesione do publicznych
-		// patrz test_sub 10
-		//lista przechowuj¹ca kolejne cyfry liczby 
-		// zapisanej w systemie o bazie base
-		// liczby "od lewej"(ma³e indeksy) maj¹ najwiêksz¹ potêgê
-		vector<long> lista;
-
 		//defaultowy konstruktor na potrzeby LargeRational
 		Large(){
 			Large(16);

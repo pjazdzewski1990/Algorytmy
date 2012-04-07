@@ -26,8 +26,11 @@ class TesterRational{
 		void test_divide();
 		void test_substract();
 		void test_GDC();
+		void autotest_GDC(int len);
 		void test_add();
 		void test_mul();
+
+		string randomString(int max_length);
 };
 
 #endif

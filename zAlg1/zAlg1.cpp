@@ -94,19 +94,19 @@ int main(int argc, char* argv[])
 			case '*':
 				wynik = u1 * u2;
 				//res = Large::convert(res, 16);
-				cout << res.toHex() << endl;
+				cout << wynik.toHex() << endl;
 				break;
 			default:
 				cout << "Nie poprawny operator" << endl;
 		}
 	}*/
 
-	/*TesterRational tt = TesterRational();
-	tt.run();
 	Tester t = Tester();
 	t.run();
+	TesterRational tt = TesterRational();
+	tt.run();
 
-	cin >>command;*/
+	cin >>command;
 	return 0;
 }
 
